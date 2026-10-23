@@ -1,0 +1,55 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle>
+  <Icon name="sun" class="i-sun" />
+  <Icon name="moon" class="i-moon" />
+</button>
+
+<script>
+  import { getTheme, setTheme } from '../scripts/theme';
+
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+  const label = () => {
+    const next = getTheme() === 'dark' ? 'light' : 'dark';
+    buttons.forEach((b) => b.setAttribute('aria-label', `Switch to ${next} theme`));
+  };
+  label();
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+      label();
+    }),
+  );
+  document.addEventListener('themechange', label);
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+  }
+  .theme-toggle:hover {
+    color: var(--text);
+    background: var(--surface);
+  }
+  /* Show the icon of the theme you would switch to. */
+  .theme-toggle :global(.i-moon) {
+    display: none;
+  }
+  :global([data-theme='light']) .theme-toggle :global(.i-sun) {
+    display: none;
+  }
+  :global([data-theme='light']) .theme-toggle :global(.i-moon) {
+    display: block;
+  }
+</style>

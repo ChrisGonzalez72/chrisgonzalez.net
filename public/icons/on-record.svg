@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- On Record app icon, concept B "Wave to Words": audio bars becoming lines of notes. Full-bleed; the OS applies the mask. -->
+  <rect width="1024" height="1024" rx="230" fill="#F4F1EA"/>
+  <g fill="#E5484D"><rect x="196" y="442" width="44" height="140" rx="22"/><rect x="268" y="362" width="44" height="300" rx="22"/><rect x="340" y="412" width="44" height="200" rx="22"/><rect x="412" y="466" width="44" height="92" rx="22"/></g>
+  <g fill="#1B2A4A"><rect x="500" y="398" width="330" height="44" rx="22"/><rect x="500" y="490" width="280" height="44" rx="22"/><rect x="500" y="582" width="320" height="44" rx="22"/></g>
+</svg>

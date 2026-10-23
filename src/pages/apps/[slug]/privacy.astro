@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Icon from '../../../components/Icon.astro';
+import { getApp, type App } from '../../../config/apps';
+
+export async function getStaticPaths() {
+  const policies = await getCollection('privacy');
+  return policies.map((policy) => ({ params: { slug: policy.data.app }, props: { policy, app: getApp(policy.data.app) } }));
+}
+
+const { policy, app } = Astro.props as { policy: Awaited<ReturnType<typeof getCollection<'privacy'>>>[number]; app: App };
+const { Content } = await render(policy);
+const effective = policy.data.effective.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<BaseLayout
+  title={`${app.name} Privacy Policy`}
+  description={policy.data.summary}
+  accent={{ accent: app.accent, onAccent: app.onAccent }}
+>
+  <article class="section page-top">
+    <div class="wrap wrap-narrow">
+      <Breadcrumbs
+        items={[
+          { label: 'Apps', href: '/apps/' },
+          { label: app.name, href: `/apps/${app.slug}/` },
+          { label: 'Privacy', href: `/apps/${app.slug}/privacy/` },
+        ]}
+      />
+      <header class="head">
+        <p class="eyebrow"><Icon name="shield" size={14} /> Privacy policy</p>
+        <h1 class="h2">{app.name} Privacy Policy</h1>
+        <p class="subtle">Effective {effective}</p>
+      </header>
+      <div class="summary card">
+        <h2 class="h3">In short</h2>
+        <ul>
+          {app.privacyHighlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </div>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .page-top {
+    padding-top: 32px;
+  }
+  .head {
+    display: grid;
+    gap: 12px;
+    margin: 32px 0;
+  }
+  .summary {
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    box-shadow: none;
+  }
+  .summary ul {
+    margin: 12px 0 0;
+    padding-left: 1.2em;
+    display: grid;
+    gap: 6px;
+    color: var(--text-2);
+  }
+</style>

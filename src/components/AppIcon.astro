@@ -1,0 +1,32 @@
+---
+import type { App } from '../config/apps';
+interface Props {
+  app: App;
+  size?: number;
+  /** Decorative when the app name is shown next to it. */
+  decorative?: boolean;
+}
+const { app, size = 64, decorative = true } = Astro.props;
+---
+
+<img
+  class="app-icon"
+  src={app.icon}
+  alt={decorative ? '' : app.iconAlt}
+  width={size}
+  height={size}
+  loading="lazy"
+  decoding="async"
+  style={`--s:${size}px`}
+/>
+
+<style>
+  .app-icon {
+    width: var(--s);
+    height: var(--s);
+    border-radius: 22.5%;
+    box-shadow: 0 0 0 1px var(--border), 0 10px 24px -12px rgb(0 0 0 / 0.5);
+    object-fit: contain;
+    flex: none;
+  }
+</style>

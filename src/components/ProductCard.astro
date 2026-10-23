@@ -1,0 +1,105 @@
+---
+import AppIcon from './AppIcon.astro';
+import Icon from './Icon.astro';
+import PlatformList from './PlatformList.astro';
+import StatusPill from './StatusPill.astro';
+import type { App } from '../config/apps';
+
+interface Props {
+  app: App;
+  headingLevel?: 'h2' | 'h3';
+}
+const { app, headingLevel: H = 'h3' } = Astro.props;
+---
+
+<article class="product-card card" style={`--app-accent:${app.accent}`} data-reveal>
+  <div class="head">
+    <AppIcon app={app} size={56} />
+    <StatusPill app={app} />
+  </div>
+  <H class="h3">
+    <a href={`/apps/${app.slug}/`} class="stretched">{app.name}</a>
+  </H>
+  <p class="tagline">{app.tagline}</p>
+  <p class="muted summary">{app.summary}</p>
+  <div class="foot">
+    <PlatformList platforms={app.platforms} size="sm" />
+    <span class="go" aria-hidden="true"><Icon name="arrow-right" size={18} /></span>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto;
+    gap: 10px;
+    padding: 28px;
+    overflow: hidden;
+    transition: transform 0.3s var(--ease), border-color 0.3s;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute;
+    inset: -40% -20% auto auto;
+    width: 70%;
+    aspect-ratio: 1;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--app-accent) 22%, transparent), transparent);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .product-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+  }
+  .product-card:focus-within {
+    border-color: var(--focus);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .stretched {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .stretched::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .stretched:focus-visible {
+    outline: none;
+  }
+  .tagline {
+    font-weight: 550;
+    color: var(--text);
+  }
+  .summary {
+    font-size: 15.5px;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .go {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    color: var(--text-2);
+    transition: transform 0.3s var(--ease), color 0.2s;
+  }
+  .product-card:hover .go {
+    transform: translateX(3px);
+    color: var(--text);
+  }
+</style>

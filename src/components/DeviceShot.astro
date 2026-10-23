@@ -1,0 +1,118 @@
+---
+/**
+ * A product screenshot in a CSS device frame. Phone captures are cut at the
+ * bottom (the App Store composites crop them there), so the phone fades out
+ * instead of showing a hard edge.
+ */
+import { Picture } from 'astro:assets';
+import type { Screenshot } from '../config/apps';
+
+interface Props {
+  shot: Screenshot;
+  /** CSS sizes attribute for responsive images. */
+  sizes?: string;
+  eager?: boolean;
+  class?: string;
+  fade?: boolean;
+}
+
+const { shot, sizes, eager = false, class: className, fade = true } = Astro.props;
+
+const widths = {
+  phone: [320, 480, 640, 964],
+  watch: [208, 416],
+  window: [600, 900, 1200],
+  raw: [400, 700, Math.min(shot.src.width, 1170)],
+}[shot.frame].filter((w) => w <= shot.src.width);
+
+const defaultSizes = {
+  phone: '(max-width: 720px) 70vw, 320px',
+  watch: '208px',
+  window: '(max-width: 900px) 92vw, 900px',
+  raw: '(max-width: 720px) 80vw, 420px',
+}[shot.frame];
+---
+
+<figure class:list={['shot', `shot-${shot.frame}`, { fade: fade && shot.frame === 'phone', landscape: shot.src.width > shot.src.height }, className]}>
+  <div class="device">
+    <Picture
+      src={shot.src}
+      alt={shot.alt}
+      widths={widths}
+      sizes={sizes ?? defaultSizes}
+      formats={['avif', 'webp']}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+      decoding="async"
+    />
+  </div>
+  {shot.caption && <figcaption>{shot.caption}</figcaption>}
+</figure>
+
+<style>
+  .shot {
+    margin: 0;
+    display: grid;
+    gap: 14px;
+    justify-items: center;
+  }
+  .device {
+    position: relative;
+    width: 100%;
+  }
+  .device :global(img) {
+    width: 100%;
+    height: auto;
+  }
+  figcaption {
+    font-size: 14.5px;
+    color: var(--text-2);
+    text-align: center;
+  }
+
+  /* Phone: dark bezel, screen corner radius ≈ 11.5% of width (matches the captures). */
+  .shot-phone .device {
+    max-width: 320px;
+    padding: 10px;
+    background: var(--device);
+    border-radius: 15% / 7%;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08) inset, 0 0 0 1px rgb(0 0 0 / 0.4), 0 40px 80px -30px rgb(0 0 0 / 0.65);
+  }
+  .shot-phone .device :global(img) {
+    border-radius: 12% / 5.6%;
+  }
+  .shot-phone.fade .device {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  }
+  .shot-phone.fade .device :global(img) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* Mac window: the capture already includes the title bar. */
+  .shot-window .device {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--border-strong), 0 40px 90px -30px rgb(0 0 0 / 0.6);
+    background: #1e2023;
+  }
+
+  .shot-watch .device {
+    max-width: 200px;
+    padding: 12px;
+    background: var(--device);
+    border-radius: 34%;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08) inset, 0 30px 60px -24px rgb(0 0 0 / 0.6);
+  }
+  .shot-watch .device :global(img) {
+    border-radius: 28%;
+  }
+
+  .shot-raw .device :global(img) {
+    border-radius: var(--radius);
+  }
+</style>

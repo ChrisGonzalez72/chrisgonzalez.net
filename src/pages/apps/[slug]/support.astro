@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AppIcon from '../../../components/AppIcon.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ContactCard from '../../../components/ContactCard.astro';
+import Faq from '../../../components/Faq.astro';
+import Icon from '../../../components/Icon.astro';
+import StatusPill from '../../../components/StatusPill.astro';
+import { apps, type App } from '../../../config/apps';
+
+export function getStaticPaths() {
+  return apps.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props as { app: App };
+const subject = `${app.name} support`;
+---
+
+<BaseLayout
+  title={`${app.name} Support`}
+  description={`Help with ${app.name}: troubleshooting, frequently asked questions and how to contact the developer.`}
+  accent={{ accent: app.accent, onAccent: app.onAccent }}
+>
+  <section class="section page-top">
+    <div class="wrap wrap-narrow">
+      <Breadcrumbs
+        items={[
+          { label: 'Apps', href: '/apps/' },
+          { label: app.name, href: `/apps/${app.slug}/` },
+          { label: 'Support', href: `/apps/${app.slug}/support/` },
+        ]}
+      />
+      <header class="head">
+        <AppIcon app={app} size={64} />
+        <div>
+          <h1 class="h2">{app.name} Support</h1>
+          <p class="muted">Answers to common questions, and a direct line to the developer.</p>
+        </div>
+      </header>
+
+      <ContactCard subject={subject} app={app} />
+
+      <h2 class="h3 sub">Troubleshooting</h2>
+      <Faq items={app.support} />
+
+      <h2 class="h3 sub">Frequently asked questions</h2>
+      <Faq items={app.faq} />
+
+      <h2 class="h3 sub">About {app.shortName}</h2>
+      <dl class="facts">
+        <div><dt>Status</dt><dd><StatusPill app={app} /></dd></div>
+        <div><dt>Runs on</dt><dd>{app.operatingSystem}</dd></div>
+        <div><dt>Developer</dt><dd>Chris Gonzalez</dd></div>
+        <div><dt>Privacy</dt><dd><a href={`/apps/${app.slug}/privacy/`}>{app.name} privacy policy</a></dd></div>
+      </dl>
+
+      {
+        app.disclaimer && (
+          <p class="callout">
+            <Icon name="alert" />
+            <span>{app.disclaimer}</span>
+          </p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-top {
+    padding-top: 32px;
+  }
+  .head {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin: 32px 0;
+  }
+  .head .muted {
+    margin-top: 6px;
+  }
+  .sub {
+    margin: 56px 0 8px;
+  }
+  .facts {
+    margin: 0 0 32px;
+    border-top: 1px solid var(--border);
+  }
+  .facts div {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    padding: 14px 2px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  dt {
+    color: var(--text-3);
+  }
+  dd {
+    margin: 0;
+  }
+</style>

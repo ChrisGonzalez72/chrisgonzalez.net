@@ -1,0 +1,164 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { apps } from '../config/apps';
+import { site } from '../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="top">
+      <div class="intro">
+        <a href="/" class="brand" aria-label="Chris Gonzalez — home">
+          <Logo size={26} />
+          <span>Chris Gonzalez</span>
+        </a>
+        <p class="subtle">{site.tagline}</p>
+        <div class="social">
+          <a href={`mailto:${site.contactEmail}`} aria-label="Email Chris"><Icon name="mail" size={18} /></a>
+          {
+            site.social.map((s) => (
+              <a href={s.href} rel="me noopener" target="_blank" aria-label={`${s.label} (opens in a new tab)`}>
+                <Icon name="github" size={18} />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <nav class="cols" aria-label="Footer">
+        <div>
+          <h2>Apps</h2>
+          <ul>
+            {apps.map((a) => <li><a href={`/apps/${a.slug}/`}>{a.shortName}</a></li>)}
+            <li><a href="/apps/">All apps</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Help</h2>
+          <ul>
+            <li><a href="/support/">Support</a></li>
+            {apps.map((a) => <li><a href={`/apps/${a.slug}/support/`}>{a.shortName} support</a></li>)}
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Chris</h2>
+          <ul>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/updates/">Updates</a></li>
+            <li><a href="/press/">Press kit</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <ul>
+            <li><a href="/legal/privacy/">Privacy</a></li>
+            <li><a href="/legal/cookies/">Cookies</a></li>
+            <li><a href="/legal/terms/">Terms</a></li>
+            {apps.map((a) => <li><a href={`/apps/${a.slug}/privacy/`}>{a.shortName} privacy</a></li>)}
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="bottom subtle">
+      <p>© {year} {site.owner}. All rights reserved.</p>
+      <p>
+        Apple, the Apple logo, iPhone, iPad, Mac, Apple Watch and App Store are trademarks of Apple Inc. Android and Google
+        Play are trademarks of Google LLC. Windows and Microsoft Store are trademarks of Microsoft Corporation.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-soft);
+    padding: 64px 0 40px;
+    font-size: 15px;
+  }
+  .top {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2.6fr;
+    gap: 48px;
+  }
+  .intro {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 650;
+  }
+  .social {
+    display: flex;
+    gap: 6px;
+  }
+  .social a {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+  }
+  .social a:hover {
+    color: var(--text);
+    background: var(--surface);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 14px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .cols a {
+    display: inline-block;
+    padding: 5px 0;
+    color: var(--text-2);
+    text-decoration: none;
+  }
+  .cols a:hover {
+    color: var(--text);
+  }
+  .bottom {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 8px;
+    font-size: 13px;
+  }
+  @media (max-width: 860px) {
+    .top {
+      grid-template-columns: 1fr;
+    }
+    .cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

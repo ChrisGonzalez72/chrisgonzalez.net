@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppIcon from '../components/AppIcon.astro';
+import ContactCard from '../components/ContactCard.astro';
+import Icon from '../components/Icon.astro';
+import { apps } from '../config/apps';
+---
+
+<BaseLayout title="Support" description="Get help with On Record, Pilot Buddy and ATLsim – CoPilot: troubleshooting, FAQs, privacy information and how to contact the developer.">
+  <section class="section top">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Support</p>
+        <h1 class="display">How can I help?</h1>
+        <p class="lead">Pick your app for troubleshooting and answers, or email me directly.</p>
+      </div>
+
+      <ul class="grid grid-3 apps">
+        {
+          apps.map((a) => (
+            <li class="card" style={`--app-accent:${a.accent}`}>
+              <AppIcon app={a} size={52} />
+              <h2 class="h3">
+                <a href={`/apps/${a.slug}/support/`} class="stretched">
+                  {a.name}
+                </a>
+              </h2>
+              <p class="muted">{a.support.length + a.faq.length} answers · troubleshooting and FAQ</p>
+              <span class="go">
+                Get help <Icon name="arrow-right" size={16} />
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="contact-wrap">
+        <ContactCard subject="Support request" title="Still stuck?" />
+      </div>
+
+      <div class="grid grid-3 more">
+        <a class="card more-card" href="/legal/privacy/">
+          <Icon name="shield" /> <span>Privacy</span>
+        </a>
+        <a class="card more-card" href="/updates/">
+          <Icon name="sparkle" /> <span>Release notes and news</span>
+        </a>
+        <a class="card more-card" href="/contact/">
+          <Icon name="chat" /> <span>Feedback and feature ideas</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .apps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .apps li {
+    display: grid;
+    gap: 10px;
+    padding: 26px;
+    transition: border-color 0.2s, transform 0.3s var(--ease);
+  }
+  .apps li:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+  .stretched {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .stretched::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .go {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    color: var(--link);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .contact-wrap {
+    margin: 40px 0 20px;
+  }
+  .more-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 20px 22px;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 550;
+    box-shadow: none;
+  }
+  .more-card:hover {
+    border-color: var(--border-strong);
+  }
+</style>

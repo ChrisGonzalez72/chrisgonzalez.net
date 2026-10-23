@@ -1,0 +1,52 @@
+---
+import ProseLayout from '../../layouts/ProseLayout.astro';
+import { site } from '../../config/site';
+---
+
+<ProseLayout
+  title="Terms of Use"
+  eyebrow="Legal"
+  updated={site.legalUpdated}
+  description="Terms for using chrisgonzalez.net and the apps made by Chris Gonzalez."
+  crumbs={[{ label: 'Terms', href: '/legal/terms/' }]}
+>
+  <h2>This website</h2>
+  <p>
+    chrisgonzalez.net is provided for information about Chris Gonzalez and his apps. You’re welcome to read, link to and share it.
+    The text, app names, icons and screenshots on it belong to Chris Gonzalez unless stated otherwise; reviewers and press may use
+    the materials in the <a href="/press/">press kit</a> to write about the apps.
+  </p>
+  <p>
+    I work to keep the information here accurate, but the site is provided “as is”, without warranties, and may change at any
+    time.
+  </p>
+
+  <h2>Apps from the Apple App Store</h2>
+  <p>
+    Apps downloaded from the App Store, including On Record, are licensed to you under Apple’s
+    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Licensed Application End User License Agreement</a>
+    unless a different agreement is shown on the app’s App Store page.
+  </p>
+
+  <h2>Apps from other stores</h2>
+  <p>Apps distributed through Google Play or the Microsoft Store are subject to that store’s terms and any licence shown on the app’s store page.</p>
+
+  <h2>Using the apps responsibly</h2>
+  <ul>
+    <li>
+      <strong>Recording.</strong> On Record records conversations. You are responsible for following the recording and consent
+      laws where you are, and for getting people’s consent before recording them.
+    </li>
+    <li>
+      <strong>AI-generated content.</strong> Summaries, notes, action items and answers written by On Record can contain mistakes.
+      Each point links to its source so you can check it; please do before relying on it.
+    </li>
+    <li>
+      <strong>Aviation.</strong> Pilot Buddy is a planning and study aid and is not approved for navigation. ATLsim – CoPilot is
+      for flight simulation only. Always use current official sources and instruments for real-world flight.
+    </li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms: <a href={`mailto:${site.contactEmail}?subject=Terms`}>{site.contactEmail}</a>.</p>
+</ProseLayout>

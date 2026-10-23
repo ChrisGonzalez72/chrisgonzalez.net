@@ -1,0 +1,92 @@
+---
+import ProseLayout from '../../layouts/ProseLayout.astro';
+import { site } from '../../config/site';
+---
+
+<ProseLayout
+  title="Cookie Policy"
+  eyebrow="Legal"
+  updated={site.legalUpdated}
+  description="ChrisGonzalez.net uses a single first-party cookie, and only when you choose a colour theme."
+  crumbs={[{ label: 'Cookies', href: '/legal/cookies/' }]}
+>
+  <p>
+    This website uses <strong>one cookie</strong>, and only if you use the theme switch (the sun or moon button at the top of every
+    page). It uses no analytics, advertising or third-party cookies, and no similar technologies such as tracking pixels or
+    fingerprinting.
+  </p>
+
+  <table tabindex="0" aria-label="Cookies used on this website">
+    <thead>
+      <tr><th scope="col">Name</th><th scope="col">Purpose</th><th scope="col">Value</th><th scope="col">Duration</th><th scope="col">Type</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>theme</code></td>
+        <td>Remembers whether you chose the light or dark theme.</td>
+        <td><code>light</code> or <code>dark</code></td>
+        <td>1 year</td>
+        <td>First-party, strictly necessary</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Why there’s no cookie banner</h2>
+  <p>
+    The site is dark by default and sets no cookie at all until you click the theme switch. The cookie then stores only the
+    preference you asked it to remember, isn’t used to identify or track you, and is never sent to anyone but this website.
+    Storage that is strictly necessary to provide a feature you explicitly request is exempt from consent under the EU
+    ePrivacy Directive (Article 5(3)) and the UK PECR, so no consent banner is needed. If that ever changes — for example, if
+    analytics are added — the site will ask for your consent first.
+  </p>
+
+  <h2>Your choices</h2>
+  <p>You can clear the preference here at any time; the site goes back to the default dark theme. You can also delete or block cookies in your browser settings.</p>
+
+  <div class="cookie-control" data-cookie-control>
+    <p class="state" aria-live="polite" data-cookie-state>Checking…</p>
+    <button class="btn btn-ghost" type="button" data-cookie-clear>Clear my theme preference</button>
+  </div>
+</ProseLayout>
+
+<script>
+  import { clearTheme, getTheme, hasThemeCookie } from '../../scripts/theme';
+
+  const state = document.querySelector<HTMLElement>('[data-cookie-state]')!;
+  const clear = document.querySelector<HTMLButtonElement>('[data-cookie-clear]')!;
+  const render = () => {
+    const set = hasThemeCookie();
+    state.textContent = set
+      ? `A theme cookie is set on this device: theme=${getTheme()}.`
+      : 'No cookie is set on this device. You’re seeing the default dark theme.';
+    clear.disabled = !set;
+  };
+  render();
+  clear.addEventListener('click', () => {
+    clearTheme();
+    render();
+  });
+  document.addEventListener('themechange', render);
+</script>
+
+<style>
+  .cookie-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .state {
+    color: var(--text);
+  }
+  .cookie-control button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+</style>

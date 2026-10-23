@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AppIcon from '../../components/AppIcon.astro';
+import DeviceShot from '../../components/DeviceShot.astro';
+import Icon from '../../components/Icon.astro';
+import PlatformList from '../../components/PlatformList.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+import { apps, flagship, otherApps } from '../../config/apps';
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: apps.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://chrisgonzalez.net/apps/${a.slug}/`, name: a.name })),
+};
+---
+
+<BaseLayout
+  title="Apps"
+  description="Every app by Chris Gonzalez: On Record for Mac, iPhone, iPad and Apple Watch; Pilot Buddy for Android; and ATLsim – CoPilot for Windows."
+  jsonLd={[itemList]}
+>
+  <section class="section top">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Apps</p>
+        <h1 class="display">Every app, in one place.</h1>
+        <p class="lead">Designed, built and supported by one independent developer.</p>
+      </div>
+
+      <article class="flag card" style={`--app-accent:${flagship.accent}`}>
+        <div class="flag-copy">
+          <div class="id">
+            <AppIcon app={flagship} size={64} />
+            <span class="eyebrow">Flagship</span>
+          </div>
+          <h2 class="h2"><a href={`/apps/${flagship.slug}/`}>{flagship.name}</a></h2>
+          <p class="tag">{flagship.tagline}</p>
+          <p class="muted">{flagship.summary}</p>
+          <PlatformList platforms={flagship.platforms} size="sm" />
+          <StoreButtons app={flagship} learnMore />
+        </div>
+        <div class="flag-visual" aria-hidden="true">
+          <DeviceShot shot={flagship.hero} sizes="260px" />
+        </div>
+      </article>
+
+      <div class="grid grid-2 rest">
+        {otherApps.map((app) => <ProductCard app={app} headingLevel="h2" />)}
+      </div>
+
+      <p class="callout more">
+        <Icon name="sparkle" />
+        <span>More apps are on the way. New releases are announced on the <a href="/updates/">updates page</a>.</span>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .flag {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    padding: clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px) 0;
+    overflow: hidden;
+    background:
+      radial-gradient(60% 80% at 100% 0%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 70%),
+      var(--surface);
+  }
+  .flag-copy {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+    padding-bottom: clamp(28px, 4vw, 48px);
+  }
+  .id {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .flag h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .flag h2 a:hover {
+    text-decoration: underline;
+  }
+  .tag {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .flag-visual {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .flag-visual :global(.shot) {
+    width: min(260px, 100%);
+  }
+  .rest {
+    margin-top: 20px;
+  }
+  .more {
+    margin-top: 32px;
+  }
+  @media (max-width: 760px) {
+    .flag {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

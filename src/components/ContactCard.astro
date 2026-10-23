@@ -1,0 +1,73 @@
+---
+/**
+ * Email contact. A mailto link rather than a form: there is no server to
+ * receive or store messages, so nothing about the visitor is collected here.
+ */
+import Icon from './Icon.astro';
+import type { App } from '../config/apps';
+import { site } from '../config/site';
+
+interface Props {
+  subject?: string;
+  app?: App;
+  title?: string;
+}
+
+const { subject = 'Hello', app, title = 'Contact the developer' } = Astro.props;
+const body = app
+  ? `\n\n---\nApp: ${app.name}\nApp version:\nDevice and OS version:\n`
+  : '';
+const href = `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
+---
+
+<div class="contact card">
+  <div class="c-icon"><Icon name="mail" size={22} /></div>
+  <div class="c-body">
+    <h2 class="h3">{title}</h2>
+    <p class="muted">
+      Email <a href={href}>{site.contactEmail}</a>. Chris reads every message and aims to reply {site.responseTime}.
+      {app && ' Include your app version and device, and what you expected to happen.'}
+    </p>
+    {
+      app?.slug === 'on-record' && (
+        <p class="subtle small">Please don’t attach meeting recordings or transcripts unless you’re asked to — a description is usually enough.</p>
+      )
+    }
+  </div>
+  <a class="btn btn-primary" href={href}>Email support <Icon name="arrow-up-right" /></a>
+</div>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 24px;
+    box-shadow: none;
+  }
+  .c-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  .c-body {
+    display: grid;
+    gap: 6px;
+  }
+  .small {
+    font-size: 14px;
+  }
+  @media (max-width: 640px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
+    .contact .btn {
+      justify-self: start;
+    }
+  }
+</style>

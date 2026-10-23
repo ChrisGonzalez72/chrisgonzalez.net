@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { apps } from '../../config/apps';
+
+const posts = (await getCollection('updates', ({ data }) => !data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const appName = (slug?: string) => apps.find((a) => a.slug === slug)?.name;
+---
+
+<BaseLayout title="Updates" description="News, releases and release notes for On Record, Pilot Buddy and ATLsim – CoPilot.">
+  <section class="section top">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow">Updates</p>
+      <h1 class="display">News and release notes.</h1>
+      <p class="lead">What’s new across the apps. <a href="/updates/rss.xml"><Icon name="link" size={14} class="inline" /> RSS feed</a></p>
+      <ol class="posts">
+        {
+          posts.map((p) => (
+            <li>
+              <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+              <div>
+                {p.data.app && <span class="pill">{appName(p.data.app)}</span>}
+                <h2 class="h3">
+                  <a href={`/updates/${p.id}/`}>{p.data.title}</a>
+                </h2>
+                <p class="muted">{p.data.summary}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .lead {
+    margin-top: 20px;
+  }
+  .lead :global(.inline) {
+    display: inline;
+    vertical-align: -2px;
+  }
+  .posts {
+    list-style: none;
+    margin: 48px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  .posts li {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  time {
+    color: var(--text-3);
+    font-size: 15px;
+    padding-top: 3px;
+  }
+  .posts div {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+  }
+  h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  h2 a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    .posts li {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>

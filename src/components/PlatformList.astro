@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import { platformLabels, type Platform } from '../config/apps';
+interface Props {
+  platforms: Platform[];
+  size?: 'sm' | 'md';
+}
+const { platforms, size = 'md' } = Astro.props;
+---
+
+<ul class:list={['platforms', size]} aria-label="Platforms">
+  {
+    platforms.map((p) => (
+      <li>
+        <Icon name={p} size={size === 'sm' ? 15 : 17} />
+        {platformLabels[p]}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .sm li {
+    padding: 4px 10px;
+    font-size: 13px;
+    gap: 6px;
+  }
+</style>
