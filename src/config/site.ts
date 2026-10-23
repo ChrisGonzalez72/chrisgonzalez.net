@@ -10,9 +10,9 @@ export const site = {
   description:
     'Chris Gonzalez is an independent software developer. Home of On Record — private AI meeting notes made on your Mac — plus Pilot Buddy and ATLsim CoPilot.',
   locale: 'en_US',
-  /** CONFIRM: this mailbox must exist and be monitored before App Review. */
+  /** Public contact address for support, privacy and press. */
   contactEmail: 'support@chrisgonzalez.net',
-  /** How long Chris aims to take to answer support email. CONFIRM. */
+  /** How long Chris usually takes to answer support email. */
   responseTime: 'within two business days',
   /** Public profiles. Only verified accounts belong here. */
   social: [{ label: 'GitHub', href: 'https://github.com/ChrisGonzalez72' }],

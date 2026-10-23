@@ -161,7 +161,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | Item | Status | Notes |
 |---|---|---|
 | Privacy Policy URL (Guideline 5.1.1(i); required field) | ✅ Required | `https://chrisgonzalez.net/apps/on-record/privacy/` — enter for both iOS and macOS. Matches the drafted "Data Not Collected" label. |
-| Support URL with contact information (required field; Guideline 1.5) | ✅ Required · ⏳ | `https://chrisgonzalez.net/apps/on-record/support/` — **the mailbox must exist (O-1).** |
+| Support URL with contact information (required field; Guideline 1.5) | ✅ Required · ⏳ | `https://chrisgonzalez.net/apps/on-record/support/` — contact: support@chrisgonzalez.net. |
 | Marketing URL | ✅ Recommended | `https://chrisgonzalez.net/apps/on-record/` |
 | App Privacy details ("Data Not Collected") | ⏳ Required | Drafted in the On Record repo; **Publish** in App Store Connect is still pending. Policy text matches it. |
 | Developer contact information | ✅ Required | Support page + footer. |
@@ -201,7 +201,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 
 | # | Item | Why it matters |
 |---|---|---|
-| **O-1** | **Create/confirm `support@chrisgonzalez.net`** (or give the address to use — change `contactEmail` in `src/config/site.ts`). Also confirm the "within two business days" reply promise. | App Review checks that the support URL offers a working contact. Every support and privacy page uses it. |
+| **O-1** | **Make sure `support@chrisgonzalez.net` receives mail** (chosen by Chris 2026-10-23; `contactEmail` in `src/config/site.ts`). | Every support and privacy page uses it, and App Review checks the support contact works. |
 | **O-2** | **Enable deployment:** GitHub → Settings → Pages → Source: **GitHub Actions**; custom domain `chrisgonzalez.net`; enforce HTTPS. Then merge this branch to `main`. | Nothing is live until then. |
 | **O-3** | **Enter the three URLs in App Store Connect** (both iOS and macOS versions) and publish App Privacy. | Required before submitting On Record 1.0. |
 | O-4 | Review copy that speaks for you: the About page, the homepage "About the developer" section and the three principles. They use only what the repositories show; add background, location, photo or LinkedIn if you want them. | The brief asked for no invented credentials, so the bio is deliberately modest. |
