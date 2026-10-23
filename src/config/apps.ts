@@ -341,8 +341,9 @@ export const apps: App[] = [
     accent: '#2D8CFF',
     onAccent: '#FFFFFF',
     platforms: ['windows'],
-    status: 'unavailable',
-    statusNote: 'Not currently available',
+    status: 'available',
+    statusNote: 'Available on the Microsoft Store',
+    // CONFIRM: paste the listing URL (https://apps.microsoft.com/detail/<product-id>) to turn the status into a download button.
     stores: [{ kind: 'microsoft-store', url: undefined, platforms: ['windows'] }],
     applicationCategory: 'GameApplication',
     operatingSystem: 'Windows 10 or later',
@@ -350,7 +351,7 @@ export const apps: App[] = [
       'Windows 10 (version 1607) or later.',
       'A microphone and speakers or headset.',
       'Uses the speech voices installed in Windows.',
-      'An internet connection and a free username are needed only for cloud checklists.',
+      'Cloud checklists are optional and off by default; turning them on needs an internet connection and a free username.',
     ],
     hero: { src: cpRun, alt: 'CoPilot Checklist running a Cessna Citation preflight checklist, with completed items ticked', frame: 'raw' },
     overview: [
@@ -370,8 +371,8 @@ export const apps: App[] = [
         shot: { src: cpManager, alt: 'CoPilot Checklist Manager editing a preflight checklist with challenges and valid responses', frame: 'raw' },
       },
       {
-        title: 'Cloud checklists',
-        body: 'Share your aircraft and checklists with the community, and download checklists other simmers have made, with the checklist author and aircraft developer shown for each.',
+        title: 'Cloud checklists (optional)',
+        body: 'Off by default. Turn it on to share your aircraft and checklists with the community, and download checklists other simmers have made, with the checklist author and aircraft developer shown for each.',
         shot: { src: cpCloud, alt: 'CoPilot Checklist cloud page listing local and shared aircraft with authors and developers', frame: 'raw' },
       },
       {
@@ -387,8 +388,8 @@ export const apps: App[] = [
     gallery: [],
     faq: [
       { q: 'Which simulators does it work with?', a: 'CoPilot Checklist runs alongside your simulator as a separate Windows app and does not read data from the simulator, so it can be used with any flight simulator on Windows.' },
-      { q: 'Do I need an account?', a: 'Only for cloud checklists — sharing yours or downloading others’. Running and editing your own checklists works without one.' },
-      { q: 'Where can I download it?', a: 'CoPilot Checklist is not available for download at the moment. Updates will be announced on this site.' },
+      { q: 'Do I need an account?', a: 'No. Cloud checklists are optional and off by default; a free username is needed only if you turn them on to share or download checklists. Running and editing your own checklists works without one.' },
+      { q: 'Where can I download it?', a: 'CoPilot Checklist is available on the Microsoft Store for Windows.' },
     ],
     support: [
       { q: 'CoPilot doesn’t hear my responses', a: 'Check that Windows is using the right microphone, then lower Voice Recognition Minimum Confidence in Settings a little. Say “Responses” to hear what CoPilot accepts for the current item.' },
@@ -396,7 +397,7 @@ export const apps: App[] = [
     ],
     privacyHighlights: [
       'Checklists you make are stored on your PC.',
-      'Cloud checklists are optional and need a username and email address.',
+      'Cloud checklists are optional and off by default; turning them on needs a username and email address.',
       'Speech recognition and speech use the voices built into Windows.',
     ],
     disclaimer: 'For flight simulation use only. Not for real-world aviation.',

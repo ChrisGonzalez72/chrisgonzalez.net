@@ -18,8 +18,8 @@ preserve. The `CNAME` was kept (now `public/CNAME`) so the domain keeps resolvin
 | Source | `ChrisGonzalez72/OnRecord` (Swift, active daily) | `ChrisGonzalez72/PilotBuddy` (Java, Oct 2026) | `ChrisGonzalez72/CoPilot-Checklist-v3` (C#/.NET 6 WPF, last commit Jan 2023) |
 | What it does | Records meetings on Mac/iPhone/iPad/Watch; transcribes, detects speakers and writes summaries, decisions, actions with on-device AI on the Mac; every point links to its moment; Ask across meetings | Turn calculator (90/180/270°), crosswind/headwind calculator, offline airport lookup (≈48,000 airports with runways and frequencies) | Voice-driven challenge/response checklists for flight simulators (Windows speech), checklist editor, optional cloud sharing with username + email |
 | Platforms | macOS 15+, iOS/iPadOS 18+, watchOS 11+ (Apple silicon Mac required) | Android 7.1+ (minSdk 25) | Windows 10 1607+ (MSIX package) |
-| Release status | App Store record created (id6822120030), v1.0 in TestFlight, **not yet released** | **Not published** (package id is still `com.example.pilotbuddy`) | **Not available**; Microsoft Store artwork exists, no live listing found |
-| Data handling | "Data Not Collected"; iCloud private DB sync; model downloads from Hugging Face | Requests **no permissions** (no internet) | Username + email + shared checklists sent to a web service at `chrisgonzalez.net/CoPilotChecklistWS/…` |
+| Release status | App Store record created (id6822120030), v1.0 in TestFlight, **not yet released** | **Not published** (package id is still `com.example.pilotbuddy`) | **On the Microsoft Store** (confirmed by Chris 2026-10-23; listing URL still to add) |
+| Data handling | "Data Not Collected"; iCloud private DB sync; model downloads from Hugging Face | Requests **no permissions** (no internet) | Cloud checklists optional and **off by default**; when on, username + email + shared checklists go to a web service at `chrisgonzalez.net/CoPilotChecklistWS/…` |
 
 Two findings differ from the brief and shaped the site:
 
@@ -184,7 +184,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | Account deletion | — | No accounts. |
 | Aviation safety disclaimer | ✅ Recommended | "Not approved for navigation" on product, support and terms pages. |
 
-### ATLsim – CoPilot — Microsoft Store (if relisted)
+### ATLsim – CoPilot — Microsoft Store (listed)
 
 | Item | Status | Notes |
 |---|---|---|
@@ -192,7 +192,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | Support contact on the listing | ✅ Required | `/apps/atlsim-copilot/support/` |
 | Microphone capability disclosure | ✅ Required | Covered in the policy. |
 | Data deletion route | ✅ / ⏳ | Email process described; Chris must confirm he can delete records on the web service. |
-| Working cloud service | ⏳ **Blocking** | The service URL is on this domain, which now serves GitHub Pages (O-5). |
+| Working cloud service | ⏳ **Blocking for cloud users** | Cloud sharing is still an option (off by default). Its service URL is on this domain; once the domain serves GitHub Pages, that path stops reaching the service (O-5). |
 | Simulation-only disclaimer | ✅ Recommended | Product, support and terms pages. |
 
 ---
@@ -205,12 +205,12 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | **O-2** | **Enable deployment:** GitHub → Settings → Pages → Source: **GitHub Actions**; custom domain `chrisgonzalez.net`; enforce HTTPS. Then merge this branch to `main`. | Nothing is live until then. |
 | **O-3** | **Enter the three URLs in App Store Connect** (both iOS and macOS versions) and publish App Privacy. | Required before submitting On Record 1.0. |
 | O-4 | Review copy that speaks for you: the About page, the homepage "About the developer" section and the three principles. They use only what the repositories show; add background, location, photo or LinkedIn if you want them. | The brief asked for no invented credentials, so the bio is deliberately modest. |
-| **O-5** | **CoPilot's web service**: `chrisgonzalez.net/CoPilotChecklistWS/Copilot-checklist.asmx` cannot run on GitHub Pages. Decide: retire cloud sharing, or host the service on a subdomain (e.g. `api.chrisgonzalez.net`) and update the app; and point the app's privacy link to `/apps/atlsim-copilot/privacy/`. | If the domain was already on GitHub Pages, cloud checklists are already broken for existing users. |
+| **O-5** | **CoPilot's web service** (cloud sharing is still offered, off by default): `chrisgonzalez.net/CoPilotChecklistWS/Copilot-checklist.asmx` cannot run on GitHub Pages. Before pointing the domain at Pages, host the service on a subdomain (e.g. `api.chrisgonzalez.net`) and ship an app update with the new endpoint. Also point the app's privacy link to `/apps/atlsim-copilot/privacy/` and the Store listing's privacy URL to the same page. | Users who turn cloud sharing on would get errors once the domain moves. |
 | O-6 | Pilot Buddy: decide on Google Play; if yes, change the application ID and complete the Data safety form. Site status says "Not yet on Google Play". | Avoids promising a release that isn't planned. |
 | O-7 | Pilot Buddy and CoPilot use the same headset logo. Consider a distinct icon for one of them. | Product recognition. |
 | O-8 | Legal review of the three product privacy policies, site privacy/cookie policies and terms. They are written from verified app behaviour but are not legal advice. | Requested by the brief. |
 | O-9 | On release day: set On Record `status: 'available'` and its store URL; add Apple's official badge; post an update. | See README → "On Record goes live". |
-| O-10 | ~~Confirm which repo is ATLsim – CoPilot.~~ **Confirmed 2026-10-23:** it is `CoPilot-Checklist-v3` (CoPilot Checklist, a Windows app for flight simulators). Still open: Microsoft Store status/link, and whether cloud sharing is in use (O-5). | The product pages are written from this repo. |
+| O-10 | **Confirmed 2026-10-23:** ATLsim – CoPilot is `CoPilot-Checklist-v3`, it is on the Microsoft Store, and cloud sharing is optional and off by default. **Still needed: the Store listing URL** — paste it into the `atlsim-copilot` store entry in `src/config/apps.ts` to turn the status into a download button. | The site says "Available on the Microsoft Store" without a link until then. |
 
 ---
 

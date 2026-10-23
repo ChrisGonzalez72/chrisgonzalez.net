@@ -41,7 +41,7 @@ const live = app.status === 'available' ? app.stores.filter((s) => s.url) : [];
       )
     ) : (
       <span class="status-btn" role="status">
-        <span class:list={['dot', app.status === 'coming-soon' ? 'soon' : 'off']} />
+        <span class:list={['dot', { available: 'live', 'coming-soon': 'soon', unavailable: 'off' }[app.status]]} />
         {app.statusNote}
       </span>
     )
