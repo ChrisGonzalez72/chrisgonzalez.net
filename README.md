@@ -19,8 +19,9 @@ npm run test:links   # check every internal link/image in dist/ (run after build
 python3 scripts/make-images.py   # regenerate favicons and Open Graph images (Pillow + Inter font)
 ```
 
-Pushing to `main` builds, link-checks and deploys via `.github/workflows/deploy.yml`.
-Pull requests are built and checked but not deployed.
+Only `main` is deployed: every push to `main` is built, link-checked and published via
+`.github/workflows/deploy.yml` (it can also be run by hand from the Actions tab). Run
+`npm run build && npm run test:links` locally before merging.
 
 ## Where things live
 
