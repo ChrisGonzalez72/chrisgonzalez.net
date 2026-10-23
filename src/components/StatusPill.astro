@@ -1,0 +1,10 @@
+---
+import type { App } from '../config/apps';
+interface Props {
+  app: App;
+}
+const { app } = Astro.props;
+const dot = { available: 'live', 'coming-soon': 'soon', unavailable: 'off' }[app.status];
+---
+
+<span class="pill"><span class:list={['dot', dot]}></span>{app.status === 'available' ? 'Available now' : app.statusNote}</span>

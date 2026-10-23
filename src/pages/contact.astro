@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCard from '../components/ContactCard.astro';
+import Icon from '../components/Icon.astro';
+import { apps } from '../config/apps';
+import { site } from '../config/site';
+---
+
+<BaseLayout title="Contact" description="Get in touch with Chris Gonzalez about his apps, press, or anything else.">
+  <section class="section top">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow">Contact</p>
+      <h1 class="display">Say hello.</h1>
+      <p class="lead">Questions, feedback, bug reports, feature ideas or press enquiries — they all reach me directly.</p>
+
+      <div class="cards">
+        <ContactCard subject="Hello from ChrisGonzalez.net" title="Email" />
+      </div>
+
+      <h2 class="h3 sub">Need help with an app?</h2>
+      <p class="muted">Each app’s support page has troubleshooting steps and answers that may solve it faster.</p>
+      <ul class="links">
+        {
+          apps.map((a) => (
+            <li>
+              <a href={`/apps/${a.slug}/support/`}>
+                {a.name} support <Icon name="arrow-right" size={16} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h2 class="h3 sub">Press and reviews</h2>
+      <p class="muted">
+        Logos, screenshots and descriptions are in the <a href="/press/">press kit</a>. For anything else, email
+        <a href={`mailto:${site.contactEmail}?subject=Press%20enquiry`}>{site.contactEmail}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .top > .wrap > * + * {
+    margin-top: 20px;
+  }
+  .cards {
+    margin-top: 40px !important;
+  }
+  .sub {
+    margin-top: 56px !important;
+  }
+  .links {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  .links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 2px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 550;
+  }
+  .links a:hover {
+    color: var(--link);
+  }
+</style>

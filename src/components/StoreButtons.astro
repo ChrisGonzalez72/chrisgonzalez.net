@@ -1,0 +1,84 @@
+---
+/**
+ * Download actions for an app. Live listings link out; anything not yet
+ * public shows its status instead of a dead or invented link.
+ *
+ * Official badges: drop Apple's/Google's/Microsoft's badge artwork (unmodified,
+ * from their marketing sites) into public/badges/<store-kind>.svg and list the
+ * kind in OFFICIAL_BADGES. Until then a plain text button is used, which every
+ * store's brand guidelines allow.
+ */
+import Icon from './Icon.astro';
+import { storeLabels, type App, type StoreKind } from '../config/apps';
+
+interface Props {
+  app: App;
+  /** Show a secondary link to the product page. */
+  learnMore?: boolean;
+  align?: 'start' | 'center';
+}
+
+const OFFICIAL_BADGES: StoreKind[] = [];
+
+const { app, learnMore = false, align = 'start' } = Astro.props;
+const live = app.status === 'available' ? app.stores.filter((s) => s.url) : [];
+---
+
+<div class:list={['store-buttons', align]}>
+  {
+    live.length > 0 ? (
+      live.map((s) =>
+        OFFICIAL_BADGES.includes(s.kind) ? (
+          <a class="badge" href={s.url} rel="noopener" data-store={s.kind}>
+            <img src={`/badges/${s.kind}.svg`} alt={`${storeLabels[s.kind].pre} ${storeLabels[s.kind].name}`} height="48" />
+          </a>
+        ) : (
+          <a class="btn btn-accent" href={s.url} rel="noopener" data-store={s.kind}>
+            {storeLabels[s.kind].pre} {storeLabels[s.kind].name}
+            <Icon name="arrow-up-right" />
+          </a>
+        ),
+      )
+    ) : (
+      <span class="status-btn" role="status">
+        <span class:list={['dot', app.status === 'coming-soon' ? 'soon' : 'off']} />
+        {app.statusNote}
+      </span>
+    )
+  }
+  {
+    learnMore && (
+      <a class="btn btn-ghost" href={`/apps/${app.slug}/`}>
+        Learn more<span class="sr-only"> about {app.name}</span> <Icon name="arrow-right" />
+      </a>
+    )
+  }
+</div>
+
+<style>
+  .store-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .center {
+    justify-content: center;
+  }
+  .badge img {
+    height: 48px;
+    width: auto;
+  }
+  .status-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 0 20px;
+    border-radius: 999px;
+    border: 1px dashed var(--border-strong);
+    color: var(--text);
+    font-size: 15.5px;
+    font-weight: 600;
+  }
+</style>

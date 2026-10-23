@@ -1,0 +1,539 @@
+---
+/**
+ * The product marketing template. Every /apps/<slug>/ page renders through
+ * this, driven entirely by the app's entry in src/config/apps.ts.
+ * Slots: "hero-visual" (replace the hero image), "after-overview",
+ * "after-features" (extra sections for flagship storytelling).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppIcon from './AppIcon.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import DeviceShot from './DeviceShot.astro';
+import Faq from './Faq.astro';
+import Icon from './Icon.astro';
+import PlatformList from './PlatformList.astro';
+import ProductCard from './ProductCard.astro';
+import StatusPill from './StatusPill.astro';
+import StoreButtons from './StoreButtons.astro';
+import { apps, type App } from '../config/apps';
+import { site } from '../config/site';
+
+interface Props {
+  app: App;
+  ogImage?: string;
+}
+
+const { app, ogImage } = Astro.props;
+const related = apps.filter((a) => a.slug !== app.slug);
+const url = `${site.url}/apps/${app.slug}/`;
+
+const softwareLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: app.name,
+  description: app.summary,
+  url,
+  image: new URL(app.icon, site.url).href,
+  applicationCategory: app.applicationCategory,
+  operatingSystem: app.operatingSystem,
+  author: { '@type': 'Person', name: site.owner, url: site.url },
+};
+const liveStore = app.status === 'available' ? app.stores.find((s) => s.url) : undefined;
+if (liveStore) softwareLd.downloadUrl = liveStore.url;
+
+const crumbs = [
+  { label: 'Apps', href: '/apps/' },
+  { label: app.name, href: `/apps/${app.slug}/` },
+];
+---
+
+<BaseLayout
+  title={app.seoTitle}
+  description={app.summary}
+  image={ogImage}
+  imageAlt={`${app.name} — ${app.tagline}`}
+  accent={{ accent: app.accent, onAccent: app.onAccent }}
+  jsonLd={[softwareLd]}
+>
+  <section class="p-hero">
+    <div class="p-hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="p-hero-grid">
+        <div class="p-hero-copy">
+          <div class="p-id">
+            <AppIcon app={app} size={72} decorative={false} />
+            {app.status === 'available' && <StatusPill app={app} />}
+          </div>
+          <h1 class:list={['display', { long: app.name.length > 12 }]}>{app.name}</h1>
+          <p class="p-tagline">{app.tagline}</p>
+          <p class="lead">{app.summary}</p>
+          <StoreButtons app={app} />
+          <PlatformList platforms={app.platforms} />
+        </div>
+        <div class="p-hero-visual">
+          <slot name="hero-visual">
+            <DeviceShot shot={app.hero} eager sizes="(max-width: 900px) 80vw, 420px" />
+          </slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="overview-title">
+    <div class="wrap overview">
+      <div class="section-head">
+        <p class="eyebrow">Overview</p>
+        <h2 id="overview-title" class="h2">Why {app.shortName}</h2>
+      </div>
+      <div class="overview-body">
+        {app.overview.map((p, i) => <p class:list={{ big: i === 0 }}>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <slot name="after-overview" />
+
+  <section class="section" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Features</p>
+        <h2 id="features-title" class="h2">What it does</h2>
+      </div>
+      <div class="features">
+        {
+          app.features.map((f, i) => (
+            <article class:list={['feature', { flip: i % 2 === 1 }]} data-reveal>
+              <div class="f-copy">
+                <h3 class="h2 f-title">{f.title}</h3>
+                <p class="muted f-body">{f.body}</p>
+                {f.points && (
+                  <ul class="f-points">
+                    {f.points.map((pt) => (
+                      <li>
+                        <Icon name="check" size={18} />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {f.shot && (
+                <div class:list={['f-visual', `v-${f.shot.frame}`]}>
+                  <DeviceShot shot={f.shot} />
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <slot name="after-features" />
+
+  <section class="section" aria-labelledby="uses-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Use cases</p>
+        <h2 id="uses-title" class="h2">Made for</h2>
+      </div>
+      <ul class="uses grid grid-3" role="list">
+        {
+          app.useCases.map((u) => (
+            <li class="card" data-reveal>
+              <h3 class="h3">{u.title}</h3>
+              <p class="muted">{u.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {
+    app.gallery.length > 0 && (
+      <section class="section gallery-section" aria-labelledby="gallery-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Gallery</p>
+            <h2 id="gallery-title" class="h2">A closer look</h2>
+          </div>
+        </div>
+        <div class="gallery" tabindex="0" role="region" aria-label={`${app.name} screenshots, scrollable`}>
+          {app.gallery.map((s) => (
+            <div class:list={['g-item', `g-${s.frame}`]}>
+              <DeviceShot shot={s} fade={false} />
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section" aria-labelledby="req-title">
+    <div class="wrap req-grid">
+      <div class="section-head">
+        <p class="eyebrow">Compatibility</p>
+        <h2 id="req-title" class="h2">What you need</h2>
+        <PlatformList platforms={app.platforms} />
+      </div>
+      <ul class="req">
+        {
+          app.requirements.map((r) => (
+            <li>
+              <Icon name="check" size={18} />
+              <span>{r}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section cta-section" aria-labelledby="get-title">
+    <div class="wrap">
+      <div class="cta card" data-reveal>
+        <AppIcon app={app} size={80} />
+        <h2 id="get-title" class="h2">{app.status === 'available' ? `Get ${app.shortName}` : `${app.shortName} — ${app.statusNote.toLowerCase()}`}</h2>
+        <p class="muted">
+          {
+            app.status === 'available'
+              ? app.tagline
+              : 'Follow the updates page for release news. Questions in the meantime are always welcome.'
+          }
+        </p>
+        <StoreButtons app={app} align="center" />
+        {app.status !== 'available' && <a href="/updates/">Read the latest updates</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <div class="section-head">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title" class="h2">Questions, answered</h2>
+        <p class="muted">Can’t find what you need? <a href={`/apps/${app.slug}/support/`}>Visit {app.shortName} support</a>.</p>
+      </div>
+      <Faq items={app.faq} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="help-title">
+    <div class="wrap">
+      <h2 id="help-title" class="sr-only">Support and privacy</h2>
+      {
+        app.disclaimer && (
+          <p class="callout disclaimer">
+            <Icon name="alert" />
+            <span>{app.disclaimer}</span>
+          </p>
+        )
+      }
+      <div class="grid grid-2 help">
+        <a class="card help-card" href={`/apps/${app.slug}/support/`}>
+          <Icon name="chat" size={22} />
+          <h3 class="h3">Support</h3>
+          <p class="muted">Troubleshooting, answers and a direct line to the developer.</p>
+          <span class="go">Get help <Icon name="arrow-right" size={16} /></span>
+        </a>
+        <a class="card help-card" href={`/apps/${app.slug}/privacy/`}>
+          <Icon name="shield" size={22} />
+          <h3 class="h3">Privacy</h3>
+          <ul class="muted ph">
+            {app.privacyHighlights.slice(0, 3).map((h) => <li>{h}</li>)}
+          </ul>
+          <span class="go">Read the privacy policy <Icon name="arrow-right" size={16} /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="related-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">More from Chris</p>
+        <h2 id="related-title" class="h2">Other apps</h2>
+      </div>
+      <div class="grid grid-2">
+        {related.map((a) => <ProductCard app={a} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .p-hero {
+    position: relative;
+    padding: 24px 0 clamp(40px, 6vw, 80px);
+    overflow: hidden;
+  }
+  .p-hero-bg {
+    position: absolute;
+    inset: -30% -20% auto;
+    height: 130%;
+    background: radial-gradient(45% 50% at 70% 35%, color-mix(in srgb, var(--app-accent) 20%, transparent), transparent 70%);
+    pointer-events: none;
+  }
+  .p-hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+    margin-top: clamp(24px, 4vw, 48px);
+  }
+  .p-hero-copy {
+    display: grid;
+    gap: 22px;
+    justify-items: start;
+  }
+  .p-id {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .p-tagline {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    color: var(--app-accent-text);
+  }
+  .p-hero-copy .lead {
+    max-width: 52ch;
+  }
+  .p-hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+  .p-hero-visual > :global(.shot-raw) {
+    max-width: min(300px, 70vw);
+  }
+  /* Landscape captures (Windows apps) can use the full column. */
+  .p-hero-visual > :global(.shot-raw.landscape) {
+    max-width: 100%;
+    width: 100%;
+  }
+  .display.long {
+    font-size: clamp(2.4rem, 5vw, 3.9rem);
+  }
+
+  .overview {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .overview .section-head {
+    margin: 0;
+  }
+  .overview-body {
+    display: grid;
+    gap: 20px;
+    color: var(--text-2);
+    font-size: 18px;
+  }
+  .overview-body .big {
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .features {
+    display: grid;
+    gap: clamp(64px, 9vw, 120px);
+  }
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 88px);
+    align-items: center;
+  }
+  .feature.flip .f-copy {
+    order: 2;
+  }
+  .f-copy {
+    display: grid;
+    gap: 18px;
+    align-content: center;
+  }
+  .f-title {
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+  .f-body {
+    font-size: 18px;
+    max-width: 46ch;
+  }
+  .f-points,
+  .req {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .f-points li,
+  .req li {
+    display: flex;
+    gap: 12px;
+    color: var(--text-2);
+  }
+  .f-points :global(svg),
+  .req :global(svg) {
+    flex: none;
+    margin-top: 4px;
+    color: var(--app-accent-text);
+  }
+  .f-visual {
+    display: flex;
+    justify-content: center;
+    padding: clamp(24px, 4vw, 48px);
+    border-radius: 28px;
+    background:
+      radial-gradient(80% 80% at 50% 0%, color-mix(in srgb, var(--app-accent) 14%, transparent), transparent 70%),
+      var(--bg-soft);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .f-visual.v-phone {
+    padding-bottom: 0;
+  }
+  .f-visual.v-phone :global(.shot) {
+    width: min(300px, 80%);
+  }
+  .f-visual.v-raw :global(.shot) {
+    width: min(100%, 560px);
+  }
+  .f-visual.v-raw :global(.shot-raw img) {
+    box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.6);
+  }
+  .f-visual.v-window {
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  .f-visual.v-window :global(.shot) {
+    width: 130%;
+    max-width: none;
+  }
+
+  .uses {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .uses li {
+    display: grid;
+    gap: 8px;
+    padding: 26px;
+    align-content: start;
+  }
+
+  .gallery {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 8px max(var(--gutter), calc((100vw - var(--wrap)) / 2)) 32px;
+    scrollbar-width: thin;
+    align-items: flex-end;
+  }
+  .g-item {
+    flex: none;
+    scroll-snap-align: center;
+  }
+  .g-window {
+    width: min(84vw, 760px);
+  }
+  .g-phone {
+    width: min(62vw, 260px);
+  }
+  .g-watch {
+    width: 200px;
+  }
+  .g-raw {
+    width: min(70vw, 300px);
+  }
+
+  .req-grid,
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .req-grid .section-head,
+  .faq-grid .section-head {
+    margin: 0;
+  }
+  .req li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 17px;
+  }
+
+  .cta {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: clamp(36px, 6vw, 72px) 24px;
+    overflow: hidden;
+    background:
+      radial-gradient(60% 90% at 50% 0%, color-mix(in srgb, var(--app-accent) 18%, transparent), transparent 70%),
+      var(--surface);
+  }
+  .cta p {
+    max-width: 52ch;
+  }
+
+  .disclaimer {
+    margin-bottom: 20px;
+  }
+  .help-card {
+    display: grid;
+    gap: 10px;
+    padding: 28px;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.3s var(--ease);
+  }
+  .help-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+  .help-card .go {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--link);
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 6px;
+  }
+  .ph {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 4px;
+    font-size: 15.5px;
+  }
+
+  @media (max-width: 900px) {
+    .p-hero-grid,
+    .overview,
+    .feature,
+    .req-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+    .feature.flip .f-copy {
+      order: 0;
+    }
+    .f-visual.v-window :global(.shot) {
+      width: 150%;
+    }
+  }
+</style>

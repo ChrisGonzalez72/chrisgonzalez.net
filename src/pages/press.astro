@@ -1,0 +1,168 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppIcon from '../components/AppIcon.astro';
+import Icon from '../components/Icon.astro';
+import PlatformList from '../components/PlatformList.astro';
+import { apps } from '../config/apps';
+import { site } from '../config/site';
+
+/** Files in public/press/<slug>/ are listed automatically at build time. */
+const assetsFor = (slug: string) => {
+  const dir = path.join(process.cwd(), 'public', 'press', slug);
+  return fs.existsSync(dir)
+    ? fs.readdirSync(dir).filter((f) => /\.(png|svg)$/.test(f)).sort().map((f) => `/press/${slug}/${f}`)
+    : [];
+};
+const label = (href: string) =>
+  href
+    .split('/')
+    .pop()!
+    .replace(/\.(png|svg)$/, '')
+    .replace(/^(iphone|mac|watch)-\d+-/, '$1 · ')
+    .replace(/-/g, ' ');
+---
+
+<BaseLayout title="Press Kit" description="Logos, app icons, screenshots and descriptions for On Record, Pilot Buddy and ATLsim – CoPilot, for press and reviewers.">
+  <section class="section top">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Press kit</p>
+        <h1 class="display">Writing about the apps?</h1>
+        <p class="lead">
+          Everything you need: icons, approved screenshots and descriptions you can quote. For review access or questions, email
+          <a href={`mailto:${site.contactEmail}?subject=Press%20enquiry`}>{site.contactEmail}</a>.
+        </p>
+      </div>
+
+      {
+        apps.map((app) => (
+          <article class="kit card" id={app.slug} style={`--app-accent:${app.accent}`}>
+            <header>
+              <AppIcon app={app} size={64} />
+              <div>
+                <h2 class="h2">{app.name}</h2>
+                <p class="muted">{app.tagline}</p>
+              </div>
+            </header>
+            <dl>
+              <div>
+                <dt>Short description</dt>
+                <dd>{app.tagline}</dd>
+              </div>
+              <div>
+                <dt>Description</dt>
+                <dd>{app.summary}</dd>
+              </div>
+              <div>
+                <dt>Platforms</dt>
+                <dd>
+                  <PlatformList platforms={app.platforms} size="sm" />
+                </dd>
+              </div>
+              <div>
+                <dt>Availability</dt>
+                <dd>{app.status === 'available' ? 'Available now' : app.statusNote}</dd>
+              </div>
+              <div>
+                <dt>Developer</dt>
+                <dd>Chris Gonzalez (independent)</dd>
+              </div>
+              <div>
+                <dt>Product page</dt>
+                <dd>
+                  <a href={`/apps/${app.slug}/`}>chrisgonzalez.net/apps/{app.slug}</a>
+                </dd>
+              </div>
+            </dl>
+            <h3 class="h3">Downloads</h3>
+            <ul class="assets">
+              {assetsFor(app.slug).map((href) => (
+                <li>
+                  <a href={href} download>
+                    <Icon name="arrow-up-right" size={14} />
+                    {label(href)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+
+      <p class="callout">
+        <Icon name="info" />
+        <span>
+          Please don’t alter the icons or screenshots. Screenshots show the real apps; the people and meetings in On Record’s
+          screenshots are fictional.
+        </span>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .kit {
+    display: grid;
+    gap: 24px;
+    padding: clamp(24px, 4vw, 40px);
+    margin-bottom: 24px;
+    box-shadow: none;
+  }
+  .kit header {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  dl {
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  dl div {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  dt {
+    color: var(--text-3);
+  }
+  dd {
+    margin: 0;
+  }
+  .assets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .assets a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  .assets a:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+  @media (max-width: 640px) {
+    dl div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

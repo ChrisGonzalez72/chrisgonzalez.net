@@ -1,0 +1,400 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppIcon from '../components/AppIcon.astro';
+import DeviceShot from '../components/DeviceShot.astro';
+import Icon from '../components/Icon.astro';
+import PlatformList from '../components/PlatformList.astro';
+import ProductCard from '../components/ProductCard.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import StatusPill from '../components/StatusPill.astro';
+import { apps, flagship as onRecord, otherApps } from '../config/apps';
+import { site } from '../config/site';
+
+const [transcriptFeature, actionsFeature, privateFeature] = onRecord.features;
+
+const benefits = [
+  { icon: 'list', title: 'Written up for you', body: 'Summary, notes by topic, decisions and action items with owners and due dates.' },
+  { icon: 'link', title: 'Every point checkable', body: 'Each point links to the moment it was said. Tap to hear it.' },
+  { icon: 'lock', title: 'Made on your Mac', body: 'Transcription and AI run locally. No servers, no account, no bot.' },
+  { icon: 'chat', title: 'Ask your meetings', body: 'Get straight answers, with links to where they came from.' },
+] as const;
+
+const principles = [
+  { icon: 'shield', title: 'Private by default', body: 'Your data stays yours. If an app doesn’t need a server, it doesn’t get one.' },
+  { icon: 'check', title: 'Claims you can check', body: 'Software should show its work — especially when AI is involved.' },
+  { icon: 'sparkle', title: 'Focused and native', body: 'Small, well-made tools that feel at home on the platform they run on.' },
+] as const;
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.owner,
+  url: site.url,
+  jobTitle: 'Independent software developer',
+  sameAs: site.social.map((s) => s.href),
+};
+---
+
+<BaseLayout title={site.name} jsonLd={[personLd]}>
+  <!-- A · Hero -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="pill"><span class="dot"></span>Independent software developer</span>
+        <h1 class="display">Thoughtful software, built independently.</h1>
+        <p class="lead">
+          I’m Chris Gonzalez. I design and build focused apps — led by <strong>On Record</strong>, private AI meeting notes made on
+          your own Mac.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-accent" href="/apps/on-record/">Explore On Record <Icon name="arrow-right" /></a>
+          <a class="btn btn-ghost" href="/apps/">View all apps</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <DeviceShot shot={privateFeature.shot!} class="hero-mac" eager sizes="(max-width: 900px) 92vw, 640px" />
+        <DeviceShot shot={onRecord.hero} class="hero-phone" eager sizes="(max-width: 900px) 42vw, 250px" />
+      </div>
+    </div>
+  </section>
+
+  <!-- B · Featured: On Record -->
+  <section class="section featured" aria-labelledby="featured-title" style={`--app-accent:${onRecord.accent}`}>
+    <div class="wrap">
+      <div class="featured-panel">
+        <div class="featured-copy" data-reveal>
+          <div class="app-id">
+            <AppIcon app={onRecord} size={64} />
+            <div>
+              <p class="eyebrow">Flagship app</p>
+              <h2 id="featured-title" class="h2">{onRecord.name}</h2>
+            </div>
+          </div>
+          <p class="featured-tagline">{onRecord.tagline}</p>
+          <p class="muted">{onRecord.summary}</p>
+          <ul class="benefits">
+            {
+              benefits.map((b) => (
+                <li>
+                  <span class="b-icon">
+                    <Icon name={b.icon} />
+                  </span>
+                  <div>
+                    <h3>{b.title}</h3>
+                    <p class="muted">{b.body}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          <PlatformList platforms={onRecord.platforms} />
+          <StoreButtons app={onRecord} learnMore />
+        </div>
+        <div class="featured-visual" data-reveal>
+          <DeviceShot shot={transcriptFeature.shot!} sizes="(max-width: 900px) 44vw, 260px" />
+          <DeviceShot shot={actionsFeature.shot!} sizes="(max-width: 900px) 44vw, 260px" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C · Other applications -->
+  <section class="section" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">More apps</p>
+        <h2 id="more-title" class="h2">Tools for pilots and simmers.</h2>
+        <p class="lead">Aviation has been a thread through my work, from flight-planning maths to voice-driven simulator checklists.</p>
+      </div>
+      <div class="grid grid-2">
+        {otherApps.map((app) => <ProductCard app={app} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- D · About -->
+  <section class="section about" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">About the developer</p>
+        <h2 id="about-title" class="h2">One developer. Every detail.</h2>
+        <p class="lead">
+          Every app here is designed, built and supported by me. Native apps for Apple platforms, Android tools for pilots and
+          Windows add-ons for flight simulators — each one small, focused and made to be trusted.
+        </p>
+        <a class="btn btn-ghost" href="/about/">More about Chris <Icon name="arrow-right" /></a>
+      </div>
+      <ul class="principles">
+        {
+          principles.map((p) => (
+            <li class="card" data-reveal>
+              <Icon name={p.icon} size={22} />
+              <h3 class="h3">{p.title}</h3>
+              <p class="muted">{p.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- E · Explore and download -->
+  <section class="section" aria-labelledby="explore-title">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Explore</p>
+        <h2 id="explore-title" class="h2">Find your app.</h2>
+      </div>
+      <ul class="explore">
+        {
+          apps.map((app) => (
+            <li style={`--app-accent:${app.accent}`}>
+              <AppIcon app={app} size={44} />
+              <div class="ex-name">
+                <a href={`/apps/${app.slug}/`}>{app.name}</a>
+                <span class="subtle">{app.platforms.length > 2 ? 'Mac, iPhone, iPad & Apple Watch' : app.operatingSystem}</span>
+              </div>
+              <StatusPill app={app} />
+              <div class="ex-links">
+                <a href={`/apps/${app.slug}/support/`}>Support</a>
+                <a href={`/apps/${app.slug}/privacy/`}>Privacy</a>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: clamp(40px, 7vw, 96px) 0 clamp(64px, 8vw, 112px);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: -20% -10% auto;
+    height: 120%;
+    background:
+      radial-gradient(40% 50% at 78% 30%, var(--glow), transparent 70%),
+      radial-gradient(30% 40% at 20% 10%, var(--glow-2), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(60% 60% at 50% 30%, #000, transparent 75%);
+    -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, #000, transparent 75%);
+    opacity: 0.5;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+  .hero-copy {
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+  .hero-copy .lead strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .hero-visual {
+    position: relative;
+    padding: 0 0 40px 60px;
+  }
+  .hero-visual :global(.hero-mac) {
+    transform: perspective(2000px) rotateY(-6deg) rotateX(2deg);
+    transform-origin: left center;
+    width: 112%;
+  }
+  .hero-visual :global(.hero-phone) {
+    position: absolute;
+    left: 0;
+    bottom: -40px;
+    width: 40%;
+    max-width: 230px;
+  }
+
+  /* Featured */
+  .featured {
+    border-top: 1px solid var(--border);
+  }
+  .featured-panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+    padding: clamp(28px, 5vw, 64px);
+    border-radius: 32px;
+    border: 1px solid var(--border);
+    background:
+      radial-gradient(70% 80% at 100% 0%, color-mix(in srgb, var(--app-accent) 16%, transparent), transparent 70%),
+      linear-gradient(180deg, var(--surface), var(--bg-soft));
+    overflow: hidden;
+  }
+  .featured-copy {
+    display: grid;
+    gap: 22px;
+    justify-items: start;
+  }
+  .app-id {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .featured-tagline {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+  .benefits {
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+  }
+  .benefits li {
+    display: flex;
+    gap: 12px;
+  }
+  .b-icon {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--app-accent) 14%, transparent);
+    color: var(--app-accent-text);
+  }
+  .benefits h3 {
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  .benefits p {
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .featured-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .featured-visual :global(.shot:last-child) {
+    margin-top: 56px;
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+  .about-grid .section-head {
+    margin: 0;
+    justify-items: start;
+  }
+  .principles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .principles li {
+    display: grid;
+    gap: 8px;
+    padding: 24px;
+  }
+  .principles :global(svg) {
+    color: var(--text-2);
+  }
+
+  /* Explore */
+  .explore {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 920px;
+    border-top: 1px solid var(--border);
+  }
+  .explore li {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 18px;
+    align-items: center;
+    padding: 18px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ex-name {
+    display: grid;
+  }
+  .ex-name a {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  .ex-name a:hover {
+    text-decoration: underline;
+  }
+  .ex-name span {
+    font-size: 14px;
+  }
+  .ex-links {
+    display: flex;
+    gap: 16px;
+    font-size: 14.5px;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .featured-panel,
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-visual {
+      padding: 0 0 40px 18%;
+      margin-top: 8px;
+    }
+    .hero-visual :global(.hero-mac) {
+      transform: none;
+      width: 100%;
+    }
+    .hero-visual :global(.hero-phone) {
+      width: 34%;
+    }
+  }
+  @media (max-width: 600px) {
+    .benefits {
+      grid-template-columns: 1fr;
+    }
+    .explore li {
+      grid-template-columns: auto 1fr;
+    }
+    .explore li > :global(.pill),
+    .explore .ex-links {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+</style>

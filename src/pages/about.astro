@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppIcon from '../components/AppIcon.astro';
+import Icon from '../components/Icon.astro';
+import { apps } from '../config/apps';
+import { site } from '../config/site';
+
+const values = [
+  {
+    icon: 'shield',
+    title: 'Privacy is a design decision',
+    body: 'On Record runs its AI on your own Mac. Pilot Buddy doesn’t even ask for internet access. When an app doesn’t need your data, it shouldn’t have it.',
+  },
+  {
+    icon: 'check',
+    title: 'Show your work',
+    body: 'In On Record, every summary point links back to the moment it was said. Software — especially AI — earns trust by letting you check it.',
+  },
+  {
+    icon: 'sparkle',
+    title: 'Small and focused',
+    body: 'Each app does a few things well, and feels at home on the platform it runs on.',
+  },
+  {
+    icon: 'chat',
+    title: 'A real person on the other end',
+    body: 'When you email for help, you reach the person who wrote the code.',
+  },
+] as const;
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: site.owner,
+    url: site.url,
+    jobTitle: 'Independent software developer',
+    sameAs: site.social.map((s) => s.href),
+  },
+};
+---
+
+<BaseLayout
+  title="About Chris Gonzalez"
+  description="Chris Gonzalez is an independent software developer building private, focused apps — including On Record for Apple platforms, Pilot Buddy for Android and ATLsim – CoPilot for Windows."
+  jsonLd={[personLd]}
+>
+  <section class="section top">
+    <div class="wrap about">
+      <div class="intro">
+        <p class="eyebrow">About</p>
+        <h1 class="display">Hi, I’m Chris.</h1>
+        <p class="lead">
+          I’m an independent software developer. I design, build and support every app on this site myself — from the first sketch
+          to the support inbox.
+        </p>
+        <div class="prose">
+          <p>
+            My flagship app is <a href="/apps/on-record/">On Record</a>, a native app for Mac, iPhone, iPad and Apple Watch that
+            turns meetings into summaries, decisions and action items — with the AI running on your own Mac rather than someone
+            else’s server.
+          </p>
+          <p>
+            Aviation runs through the rest of my work. <a href="/apps/pilot-buddy/">Pilot Buddy</a> puts the flight-planning
+            maths pilots reach for most into one offline Android app, and <a href="/apps/atlsim-copilot/">ATLsim – CoPilot</a> gives
+            flight simmers a voice-controlled first officer for their checklists.
+          </p>
+          <p>I care about software that is private by default, honest about what it does, and pleasant to use every day.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/contact/">Get in touch</a>
+          {
+            site.social.map((s) => (
+              <a class="btn btn-ghost" href={s.href} rel="me noopener" target="_blank">
+                <Icon name="github" /> {s.label}
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <aside class="apps-aside card" aria-label="Apps by Chris">
+        <h2 class="eyebrow">Apps</h2>
+        <ul>
+          {
+            apps.map((a) => (
+              <li>
+                <AppIcon app={a} size={44} />
+                <div>
+                  <a href={`/apps/${a.slug}/`}>{a.name}</a>
+                  <span class="subtle">{a.tagline}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How I work</p>
+        <h2 class="h2">What every app should be.</h2>
+      </div>
+      <ul class="grid grid-2 values">
+        {
+          values.map((v) => (
+            <li class="card" data-reveal>
+              <Icon name={v.icon} size={22} />
+              <h3 class="h3">{v.title}</h3>
+              <p class="muted">{v.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top {
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+  .about {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+  .intro {
+    display: grid;
+    gap: 24px;
+  }
+  .intro .prose {
+    font-size: 18px;
+  }
+  .apps-aside {
+    padding: 24px;
+    box-shadow: none;
+    position: sticky;
+    top: 88px;
+  }
+  .apps-aside ul {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .apps-aside li {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .apps-aside li div {
+    display: grid;
+    font-size: 14.5px;
+  }
+  .apps-aside a {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .apps-aside a:hover {
+    text-decoration: underline;
+  }
+  .values {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .values li {
+    display: grid;
+    gap: 10px;
+    padding: 28px;
+  }
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+    .apps-aside {
+      position: static;
+    }
+  }
+</style>

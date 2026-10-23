@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<BaseLayout title="Page not found" description="This page doesn’t exist." noindex>
+  <section class="section nf">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow">404</p>
+      <h1 class="display">Nothing on record here.</h1>
+      <p class="lead">The page you’re looking for has moved or never existed.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/">Go home</a>
+        <a class="btn btn-ghost" href="/apps/">Browse apps <Icon name="arrow-right" /></a>
+        <a class="btn btn-ghost" href="/support/">Support</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf .wrap > * + * {
+    margin-top: 22px;
+  }
+  .nf {
+    min-height: 60vh;
+    display: grid;
+    align-items: center;
+  }
+</style>

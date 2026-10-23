@@ -1,0 +1,13 @@
+---
+import ProductPage from '../../../components/ProductPage.astro';
+import { apps, type App } from '../../../config/apps';
+
+// On Record has its own page (apps/on-record/index.astro); every other app uses the template as-is.
+export function getStaticPaths() {
+  return apps.filter((app) => !app.flagship).map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props as { app: App };
+---
+
+<ProductPage app={app} ogImage={`/og/${app.slug}.png`} />
