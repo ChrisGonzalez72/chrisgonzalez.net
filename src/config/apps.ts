@@ -187,7 +187,7 @@ export const apps: App[] = [
       },
     ],
     useCases: [
-      { title: 'Team meetings', body: 'Leave with the decisions and the action items already written down, each with an owner and a due date.' },
+      { title: 'Team meetings', body: 'Leave with the decisions and the action items already written down, with owners and due dates wherever they were said.' },
       { title: 'Client and sales calls', body: 'Record your microphone together with the call audio from Zoom, Teams, Webex or any other app on your Mac.' },
       { title: 'Interviews', body: 'A transcript split by speaker, where every line plays back the moment it was said.' },
       { title: 'Lectures and courses', body: 'Group recordings into courses and series, then ask questions across all of them.' },

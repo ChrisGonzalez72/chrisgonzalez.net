@@ -46,7 +46,7 @@ On Record keeps a diagnostic log on your device. It does not contain meeting con
 
 ## Sharing and exporting
 
-Nothing leaves your devices unless you choose to share it. If you export a meeting as a PDF or text — with or without the transcript and original audio — you decide where it goes.
+Apart from syncing through your own iCloud, as described above, nothing is shared unless you choose to. If you export a meeting as a PDF or text — with or without the transcript and original audio — you decide where it goes.
 
 ## Recording other people
 
