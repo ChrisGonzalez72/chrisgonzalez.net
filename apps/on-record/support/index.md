@@ -10,7 +10,7 @@ Every point links back to the moment it was said.
 
 **Contact:** [chris@chrisgonzalez.net](mailto:chris@chrisgonzalez.net). We
 usually reply within two business days.
-Privacy: [Privacy Policy](/Privacy)
+Privacy: [Privacy Policy](/apps/on-record/privacy/)
 
 ## What you need
 
@@ -60,7 +60,7 @@ word to your vocabulary so it's spelled right next time.
 **Does my meeting go to the cloud?**
 Your meetings are processed on your Mac and never sent to an AI service.
 Recordings and results move between your own devices through your iCloud
-account. See the [Privacy Policy](/Privacy).
+account. See the [Privacy Policy](/apps/on-record/privacy/).
 
 **How do I delete a meeting?**
 On the Mac, open it and choose **Delete Meeting…** from its menu. On iPhone
