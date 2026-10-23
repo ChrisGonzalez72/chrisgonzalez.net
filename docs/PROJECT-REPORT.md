@@ -210,7 +210,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | O-7 | Pilot Buddy and CoPilot use the same headset logo. Consider a distinct icon for one of them. | Product recognition. |
 | O-8 | Legal review of the three product privacy policies, site privacy/cookie policies and terms. They are written from verified app behaviour but are not legal advice. | Requested by the brief. |
 | O-9 | On release day: set On Record `status: 'available'` and its store URL; add Apple's official badge; post an update. | See README → "On Record goes live". |
-| O-10 | Product naming: the site uses "ATLsim – CoPilot" (as in the brief) for the series and "CoPilot Checklist" for the app (as in its package manifest). Confirm. | Consistency with any future store listing. |
+| O-10 | ~~Confirm which repo is ATLsim – CoPilot.~~ **Confirmed 2026-10-23:** it is `CoPilot-Checklist-v3` (CoPilot Checklist, a Windows app for flight simulators). Still open: Microsoft Store status/link, and whether cloud sharing is in use (O-5). | The product pages are written from this repo. |
 
 ---
 
