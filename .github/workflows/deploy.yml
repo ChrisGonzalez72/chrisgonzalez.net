@@ -1,17 +1,22 @@
 name: Build and deploy
 
-# Runs only for main: every push to main is built, checked and published.
+# main = development: every push and pull request is built and checked, never published.
+# prod = live site:   a merge (push) to prod is built, checked and published to GitHub Pages.
+# Release by merging a pull request from main into prod.
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main, prod]
+  pull_request:
+    branches: [main, prod]
+  workflow_dispatch: # run by hand on prod to republish
 
 permissions:
   contents: read
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Never cancel a release that is publishing; superseded dev builds can be dropped.
+  cancel-in-progress: ${{ github.ref != 'refs/heads/prod' }}
 
 jobs:
   build:
@@ -26,10 +31,12 @@ jobs:
       - run: npm run build # astro check + astro build
       - run: npm run test:links
       - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/prod'
         with:
           path: dist
 
   deploy:
+    if: github.ref == 'refs/heads/prod'
     needs: build
     runs-on: ubuntu-latest
     permissions:

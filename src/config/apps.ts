@@ -264,26 +264,35 @@ export const apps: App[] = [
     slug: 'pilot-buddy',
     name: 'Pilot Buddy',
     shortName: 'Pilot Buddy',
-    tagline: 'Flight planning, simplified.',
+    tagline: 'Your flight sim co-pilot.',
     summary:
-      'Three tools general aviation and student pilots reach for most — course reversal headings, crosswind and headwind components, and airport runways and frequencies — in one offline Android app.',
-    seoTitle: 'Pilot Buddy — Crosswind, Turn & Airport Reference App for Pilots (Android)',
+      'Three tools flight simmers reach for most — course reversal headings, crosswind and headwind components, and airport runways and frequencies — in one offline app for iPhone, iPad and Android. For flight simulator use only.',
+    seoTitle: 'Pilot Buddy — Crosswind, Turn & Airport Reference for Flight Simulators (iPhone, iPad, Android)',
     icon: '/icons/pilot-buddy.png',
     iconAlt: 'Pilot Buddy logo: a headset with a check mark',
     accent: '#5B7BE0',
     onAccent: '#FFFFFF',
-    platforms: ['android'],
-    status: 'unavailable',
-    statusNote: 'Not yet on Google Play',
-    stores: [{ kind: 'google-play', url: undefined, platforms: ['android'] }],
-    applicationCategory: 'TravelApplication',
-    operatingSystem: 'Android 7.1 or later',
-    requirements: ['Android 7.1 or later, phone or tablet.', 'No internet connection needed.'],
+    platforms: ['iphone', 'ipad', 'android'],
+    status: 'coming-soon',
+    statusNote: 'Coming soon to the App Store and Google Play',
+    stores: [
+      // When it goes live: set url to 'https://apps.apple.com/app/id6828184019' and status to 'available'.
+      { kind: 'app-store', url: undefined, platforms: ['iphone', 'ipad'] },
+      { kind: 'google-play', url: undefined, platforms: ['android'] },
+    ],
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'iOS 17, iPadOS 17, Android 7.1',
+    requirements: [
+      'iPhone or iPad with iOS 17 or iPadOS 17 or later.',
+      'Android 7.1 or later, phone or tablet.',
+      'No internet connection needed.',
+      'For use with flight simulation software only.',
+    ],
     hero: { src: pbHome, alt: 'Pilot Buddy home screen with Turn Calculator, Crosswind Calculator and Airport Information buttons', frame: 'raw' },
     overview: [
-      'Pilots often work wind-triangle maths on a paper E6B, look up runways in one place and frequencies in another, and do course reversal headings in their head — usually when time is short.',
-      'Pilot Buddy puts the three most-used calculations and references into one app, so the answer is on screen as soon as you finish typing.',
-      'Everything is calculated on the device, and airport data ships inside the app, so it works without a signal.',
+      'In a flight simulator you often work wind-triangle maths on a paper E6B, look up runways in one place and frequencies in another, and do course reversal headings in your head — usually while the sim keeps flying.',
+      'Pilot Buddy puts the three most-used calculations and references into one app on your phone or tablet, so the answer is on screen as soon as you finish typing.',
+      'Everything is calculated on the device, and airport data ships inside the app, so it works without a connection. Pilot Buddy is for flight simulation only and is not for real-world navigation.',
     ],
     features: [
       {
@@ -304,9 +313,9 @@ export const apps: App[] = [
       },
     ],
     useCases: [
-      { title: 'Preflight planning', body: 'Check the crosswind for each runway before you choose one.' },
-      { title: 'Student pilots', body: 'Confirm your E6B and mental-maths answers while you learn.' },
-      { title: 'Quick airport reference', body: 'Look up a runway length or a frequency without opening a chart.' },
+      { title: 'Sim flight planning', body: 'Check the crosswind for each runway before you pick one for your simulated departure or arrival.' },
+      { title: 'Learning in the sim', body: 'Check your E6B and mental-maths answers while you practise in a simulator.' },
+      { title: 'Quick airport reference', body: 'Look up a runway length or a frequency for your sim flight without leaving the cockpit view.' },
     ],
     gallery: [
       { src: pbHomeLight, alt: 'Pilot Buddy home screen in the light theme', frame: 'raw', caption: 'Light and dark themes.' },
@@ -314,19 +323,20 @@ export const apps: App[] = [
     faq: [
       { q: 'Does Pilot Buddy need an internet connection?', a: 'No. Calculations run on your device and the airport database is built into the app.' },
       { q: 'Which airports are included?', a: 'The built-in database has about 48,000 airports worldwide, each with its runways and the frequencies on record.' },
-      { q: 'When will it be on Google Play?', a: 'Pilot Buddy is not on Google Play yet. Updates will be announced on this site.' },
+      { q: 'Can I use Pilot Buddy for real flights?', a: 'No. Pilot Buddy is for flight simulation only. Its data may be inaccurate, incomplete or out of date, and it is not approved for real-world flight planning or navigation.' },
+      { q: 'When will it be on the App Store and Google Play?', a: 'Pilot Buddy is coming soon to both. Releases will be announced on this site.' },
     ],
     support: [
       { q: 'An airport is missing or its data is out of date', a: 'Airport data is a static dataset bundled with the app and may not reflect recent changes. Email the identifier and what looks wrong.' },
       { q: 'The calculator shows an error', a: 'Headings and wind directions must be whole degrees from 0 to 359, and wind speed must be a number of knots.' },
     ],
     privacyHighlights: [
-      'Pilot Buddy requests no Android permissions — not even internet access.',
+      'Pilot Buddy makes no network connections; on Android it requests no permissions — not even internet access.',
       'It cannot send any information off your device.',
       'No account, no analytics, no advertising.',
     ],
     disclaimer:
-      'Pilot Buddy is a planning and study aid. It is not approved for navigation. Always use current official charts, publications and flight instruments.',
+      'For flight simulator use only. Pilot Buddy is not approved for real-world flight planning, navigation or any operational aviation use. Its information may be inaccurate, incomplete or out of date. Never use it in place of official charts, certified avionics, NOTAMs or guidance from air traffic control.',
   },
   {
     slug: 'atlsim-copilot',
