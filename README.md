@@ -19,9 +19,21 @@ npm run test:links   # check every internal link/image in dist/ (run after build
 python3 scripts/make-images.py   # regenerate favicons and Open Graph images (Pillow + Inter font)
 ```
 
-Only `main` is deployed: every push to `main` is built, link-checked and published via
-`.github/workflows/deploy.yml` (it can also be run by hand from the Actions tab). Run
-`npm run build && npm run test:links` locally before merging.
+## Branches and releases
+
+| Branch | Purpose | What CI does (`.github/workflows/deploy.yml`) |
+| --- | --- | --- |
+| `main` | Development. All work lands here. | Builds, type-checks and link-checks every push and pull request. Never publishes. |
+| `prod` | The live site at chrisgonzalez.net. | Builds, checks and **publishes to GitHub Pages** on every merge (push). |
+
+**Release:** open a pull request from `main` into `prod`, wait for the `build` check, merge.
+The site updates about a minute later. To republish without changes, run the workflow by hand
+on `prod` (Actions → Build and deploy → Run workflow).
+
+**Hotfix:** branch from `prod`, open a pull request into `prod`, merge; then merge `prod` back
+into `main` so the branches don't drift.
+
+Run `npm run build && npm run test:links` locally before opening a pull request.
 
 ## Where things live
 
