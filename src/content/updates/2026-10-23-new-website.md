@@ -6,7 +6,7 @@ summary: ChrisGonzalez.net is now the official home of On Record, Pilot Buddy an
 
 ChrisGonzalez.net has been rebuilt as the home for everything I make.
 
-- **[On Record](/apps/on-record/)** — private AI meeting notes made on your own Mac, for Mac, iPhone, iPad and Apple Watch — has its own page, and is coming soon to the App Store.
+- **[On Record](/apps/on-record/)** — meeting notes you can check, for Mac, iPhone, iPad and Apple Watch — has its own page, and is coming soon to the App Store.
 - **[Pilot Buddy](/apps/pilot-buddy/)** and **[ATLsim – CoPilot](/apps/atlsim-copilot/)** each have a product page too.
 - Every app has a support page and its own privacy policy, and there’s one place to [get help](/support/).
 

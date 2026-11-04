@@ -135,7 +135,7 @@ def favicons():
 if __name__ == "__main__":
     (PUB / "og").mkdir(exist_ok=True)
     or_icon = PUB / "press" / "on-record" / "on-record-icon-1024.png"
-    product("on-record", "On Record", "Private meeting notes, made on your Mac.", or_icon, CORAL,
+    product("on-record", "On Record", "Meeting notes you can check, written with Apple Intelligence.", or_icon, CORAL,
             ASSETS / "on-record" / "iphone-summary.png", "phone")
     product("pilot-buddy", "Pilot Buddy", "Flight planning, simplified.", PUB / "icons" / "pilot-buddy.png", (91, 123, 224),
             ASSETS / "pilot-buddy" / "home-dark.png", "phone")

@@ -15,8 +15,8 @@ const steps = [
   },
   {
     icon: 'sparkle',
-    title: 'Your Mac writes it up',
-    body: 'Transcription, speaker detection and the AI writing run on your Mac, with models you download once.',
+    title: 'Written up with Apple Intelligence',
+    body: 'Transcription and speaker detection run on your device. Apple Intelligence writes the summary, decisions and actions.',
   },
   {
     icon: 'check',
@@ -32,35 +32,58 @@ const devices = [
     points: [
       'Records your microphone together with the call audio from Zoom, Teams, Webex or any other app.',
       'Imports audio files you already have.',
-      'Does all the transcription and writing up.',
+      'Writes up meetings with Apple Intelligence.',
     ],
   },
   {
     icon: 'iphone',
     name: 'iPhone',
     points: [
-      'Start in one tap from the app, a Home Screen widget, Control Center, the Action button or Siri.',
+      'Start from the app, a widget, Control Center, the Action button or Siri.',
       'Keeps recording on the Lock Screen with a Live Activity.',
+      'Writes up meetings with Apple Intelligence.',
     ],
   },
   {
     icon: 'ipad',
     name: 'iPad',
-    points: ['Record in the app, even offline.', 'Recordings go to your Mac when the iPad is back online.'],
+    points: ['Record in the app and tap with Apple Pencil to mark a moment.', 'Writes up meetings with Apple Intelligence.'],
   },
   {
     icon: 'watch',
     name: 'Apple Watch',
-    points: ['Start, pause and stop from your wrist.', 'Mark important moments while you record.'],
+    points: ['Start, pause and stop from your wrist.', 'See today’s actions.', 'Records through your iPhone.'],
   },
 ] as const;
 
 const organize = [
-  { icon: 'users', text: 'Name speakers once and On Record suggests them in future meetings.' },
+  { icon: 'users', text: 'Name a voice once and it’s recognized in later meetings.' },
   { icon: 'folder', text: 'Group meetings into series, projects and courses.' },
-  { icon: 'list', text: 'Browse everyone you meet with and every decision across your meetings.' },
+  { icon: 'list', text: 'Every decision from every meeting in one place.' },
   { icon: 'book', text: 'Teach it names and acronyms with your own vocabulary.' },
-  { icon: 'share', text: 'Export a meeting as a PDF or text, with or without the transcript and audio.' },
+  { icon: 'share', text: 'Export a meeting as a PDF, Markdown or text, and send actions to Reminders.' },
+] as const;
+
+const plans = [
+  {
+    name: 'Free',
+    lead: 'Unlimited recording and transcripts, and the full write-up on 5 meetings.',
+    points: ['Record, transcribe, correct, search and sync without limit.', 'The full write-up and Ask on 5 meetings, counted across all your devices.'],
+  },
+  {
+    name: 'On Record Pro',
+    lead: 'A one-time purchase for all your devices, shared with your family.',
+    points: [
+      'Write-ups on every meeting',
+      'Ask across meetings',
+      'Series, projects and courses',
+      'Speakers recognized across meetings',
+      'Export and Reminders',
+      'Calendar naming (Mac)',
+      'Rules that remove old recordings',
+      'Unlimited vocabulary',
+    ],
+  },
 ] as const;
 ---
 
@@ -99,7 +122,7 @@ const organize = [
         <div class="section-head">
           <p class="eyebrow">Record anywhere</p>
           <h2 id="anywhere-title" class="h2">One app on every Apple device you carry.</h2>
-          <p class="lead">One App Store listing covers Mac, iPhone, iPad and Apple Watch. Recordings from any of them end up written up on your Mac.</p>
+          <p class="lead">One App Store listing covers Mac, iPhone, iPad and Apple Watch. Any of your devices with Apple Intelligence can do the work, and the others show the results.</p>
         </div>
         <ul class="devices grid">
           {
@@ -125,7 +148,7 @@ const organize = [
           <p class="eyebrow"><Icon name="lock" size={14} /> Privacy</p>
           <h2 id="private-title" class="h2">Your meetings stay yours.</h2>
           <p class="lead">
-            No On Record servers. No account. No meeting bot. Your meetings are never used for advertising, tracking or AI training.
+            No On Record servers. No account. No meeting bot. Audio and voices are never sent to any AI service, and On Record collects no data.
           </p>
           <a class="btn btn-ghost" href="/apps/on-record/privacy/">Read the privacy policy <Icon name="arrow-right" /></a>
         </div>
@@ -162,6 +185,30 @@ const organize = [
           <Icon name="info" />
           <span>Please follow the law where you are and get people’s consent before recording them.</span>
         </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="plans-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Free and Pro</p>
+          <h2 id="plans-title" class="h2">Try it on 5 meetings. Buy Pro once.</h2>
+        </div>
+        <ul class="devices grid">
+          {
+            plans.map((p) => (
+              <li class="card" data-reveal>
+                <h3 class="h3">{p.name}</h3>
+                <p class="muted">{p.lead}</p>
+                <ul>
+                  {p.points.map((pt) => (
+                    <li>{pt}</li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </section>
   </Fragment>

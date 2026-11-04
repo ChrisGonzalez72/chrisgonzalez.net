@@ -8,7 +8,7 @@ export const site = {
   url: 'https://chrisgonzalez.net',
   tagline: 'Independent software, made with care.',
   description:
-    'Chris Gonzalez is an independent software developer. Home of On Record — private AI meeting notes made on your Mac — plus Pilot Buddy and ATLsim CoPilot.',
+    'Chris Gonzalez is an independent software developer. Home of On Record — meeting notes you can check, written with Apple Intelligence — plus Pilot Buddy and ATLsim CoPilot.',
   locale: 'en_US',
   /** Public contact address for support, privacy and press. */
   contactEmail: 'support@chrisgonzalez.net',
