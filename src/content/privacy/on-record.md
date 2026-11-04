@@ -1,75 +1,143 @@
 ---
 app: on-record
-effective: 2026-10-23
-summary: How On Record handles your recordings, transcripts and other information. On Record has no servers, no account and no analytics; your meetings are processed on your own Mac.
+effective: 2026-11-04
+summary: How On Record 2.0 handles your recordings, transcripts and other information. No On Record servers, no account and no analytics; audio and voices are never sent to any AI service.
 ---
 
-This policy explains what happens to your information when you use **On Record** on Mac, iPhone, iPad and Apple Watch. On Record is made by Chris Gonzalez, an independent developer ("I", "me").
+On Record ("the app") is made by Christopher Michael Gonzalez ("we"). This
+policy covers On Record 2.0 for Mac, iPhone, iPad and Apple Watch.
 
-The short version: **I don’t collect your data.** On Record has no On Record servers, no user accounts, no analytics, no crash-reporting service and no advertising. Your recordings and everything made from them stay on your devices and in your own iCloud account, which I cannot access.
+## The short version
 
-## What On Record stores, and where
+We don’t collect any data from the app. There are no On Record servers, no
+accounts, no analytics, no advertising and no tracking.
 
-On Record keeps the following on your devices:
+Your recordings and everything made from them stay on your devices and in
+your own iCloud account, which we can’t access.
 
-- **Recordings** you make or import, and the original audio.
-- **Transcripts**, including the original transcript and any corrections you make.
-- **What On Record writes from them**: summaries, notes, decisions, action items, and the answers to questions you ask.
-- **People and voice profiles** — the names you give speakers, and the voice profiles On Record uses to suggest them in future meetings. Voice profiles stay on your Mac and are not synced.
-- **Your organisation and settings**: series, projects, courses, vocabulary and preferences.
+To write summaries, actions and answers, the app sends transcript text to
+Apple’s Private Cloud Compute, but only if you turn that on. Audio and
+voices are never sent to any AI service.
 
-### Syncing between your devices
+## What the app does with your meetings
 
-When you use On Record on more than one device, recordings, meetings and results travel between them through **your own iCloud account** (Apple’s CloudKit private database). On a Mac, meeting audio is synced as a compressed copy. This data is stored by Apple under your Apple Account and is governed by [Apple’s privacy policy](https://www.apple.com/legal/privacy/). I have no access to it.
+- **Recording.** The app records audio from your microphone only when you
+  start a recording. On the Mac, it can also record the audio another app
+  plays (for example a Zoom or Teams call), if you turn that on. You can
+  also import audio files.
+- **Transcripts and speakers.** Transcription uses Apple’s speech
+  recognition on your device. Telling speakers apart and recognizing voices
+  uses SpeakerKit, which is built into the app and runs on your device.
+  Neither sends your audio anywhere.
+- **Apple Intelligence.** Actions, decisions, summaries, notes and answers
+  to your questions are written by Apple Intelligence on Apple’s Private
+  Cloud Compute. Before the first request, the app explains this and asks
+  you to turn it on. You can turn it off at any time: on the Mac in
+  **Settings → Privacy & Apple Intelligence**, and on iPhone and iPad in
+  **Settings → Apple Intelligence**.
+  - **What’s sent:** the transcript text, context you entered (custom
+    vocabulary, speaker names, the meeting type), and the questions you ask.
+  - **Never sent:** audio, voice samples, voice profiles or voice data of
+    any kind.
+  - Apple processes these requests under its own privacy policy, and Apple
+    says Private Cloud Compute doesn’t keep them. We never receive them.
+- **Spoken questions.** A question you speak to Ask is turned into text on
+  your device, and the audio isn’t kept. The question text is then handled
+  like a typed one.
 
-## How your meetings are processed
+## iCloud sync between your devices
 
-Transcription, speaker detection and AI writing run **on your Mac**, using models you download once. Your meetings are not sent to an AI service and are never used to train AI models.
+If you’re signed in to iCloud, your library syncs between your own Mac,
+iPhone and iPad through your private iCloud database, and Apple Watch works
+through your iPhone. The library includes meetings, transcripts, results,
+people, settings and a compressed copy of each recording.
+- Transcript text, titles, names and results are stored in encrypted
+  iCloud fields.
+- Recordings, and high-quality originals if you choose to keep and sync
+  them, are encrypted with your library key before they leave your device.
+  The library key is kept in your iCloud Keychain, so only your own
+  devices can open them.
+- Apple stores this data under its own privacy policy. We have no access to
+  it.
 
-- **Model downloads.** When you choose to download a model in Settings → Models, your Mac downloads the model files directly from Hugging Face (huggingface.co) over HTTPS. The request fetches the files only; no meeting content or personal information is sent. As with any website, Hugging Face receives your IP address when your Mac connects to it.
-- **Spoken questions.** If you speak a question to Ask, it is turned into text by Apple’s speech recognition **on your device**. Where on-device recognition is not available, the microphone button is not offered, so no audio is sent to Apple.
+Without iCloud, the app works on one device and nothing syncs.
 
-## Permissions On Record asks for
+## Voice profiles
 
-| Permission | Why |
-|---|---|
-| Microphone (Mac, iPhone, iPad, Apple Watch) | To record the meetings you choose to capture. |
-| System audio recording (Mac) | To record what other apps play during a meeting, such as a Zoom or Teams call, together with your microphone. |
-| Calendars (Mac, optional) | When you switch it on, to name a recording after the calendar event happening when you press Record. The event is read on your Mac and not sent anywhere. |
-| Speech recognition (Mac, iPhone, iPad) | To turn a question you speak to Ask into text on your device. The audio isn’t kept. |
+When you name a speaker, the app can keep a voice profile so it recognizes
+that person in later meetings.
+- **Voice profiles sync between your own devices by default.** The first
+  time you name a voice, the app tells you this and lets you keep it on or
+  turn it off.
+- They’re encrypted with your library key before they’re uploaded, and
+  they’re never shared with anyone else.
+- They’re never sent to Apple Intelligence or any other AI service.
+- To stop syncing them, turn off **Voice profiles** under **What Syncs**:
+  in **Settings → Sync** on the Mac, or in **Settings** on iPhone and iPad.
+  The choice applies to all your devices.
+- Deleting a voice profile deletes it on all your devices.
 
-You can change these permissions at any time in your device’s Settings.
+## In-app purchase
+
+On Record Pro is bought through the App Store. Apple handles the payment.
+The app learns only whether Pro is unlocked, and we receive no payment or
+personal details from it. The count of your 5 free meetings is kept in your
+own iCloud account.
+
+## Permissions the app asks for
+
+- **Microphone:** to record meetings you choose to record.
+- **System audio (Mac):** to record another app’s call audio together with
+  your microphone, when you turn it on.
+- **Speech Recognition:** to turn a question you speak to Ask into text, on
+  your device.
+- **Calendars (Mac, optional):** to name a recording after the calendar
+  event happening when you press Record. Only the event’s name is used.
+- **Reminders (optional):** to add an action you choose to your Reminders,
+  with its due date and the meeting’s name.
+- **Face ID, Touch ID or Optic ID (optional):** to lock the app, if you turn
+  that on.
+
+## Network connections
+
+The app connects only to Apple’s services:
+- iCloud, for sync;
+- Private Cloud Compute, when Apple Intelligence processing is on;
+- the App Store, for the purchase.
+
+It makes no other network connections, and it downloads no models.
 
 ## Diagnostics
 
-On Record keeps a diagnostic log on your device. It does not contain meeting content. It is never sent automatically; on iPhone you can choose to share it yourself (Settings → Diagnostics), for example when asking for help.
+Each device keeps diagnostics that list what the app did, with error codes
+and counts only. They never include meeting content, titles, names or file
+paths, and the app never sends them anywhere. If you want to send them to
+us, you can copy them yourself from the Diagnostics section of Settings
+(on the Mac, **Settings → Advanced**) and send them by email.
 
 ## Sharing and exporting
 
-Apart from syncing through your own iCloud, as described above, nothing is shared unless you choose to. If you export a meeting as a PDF or text — with or without the transcript and original audio — you decide where it goes.
+If you share or export a meeting (for example as a PDF), it goes only where
+you send it.
 
-## Recording other people
+## Deleting your data
 
-Recording laws differ by place. You are responsible for following the law where you are and for getting people’s consent before recording them.
+Deleting a meeting removes it, with its recording, transcripts, results and
+the voice samples taken from it, from all your devices and from your iCloud.
+You can also remove just a meeting’s recording and keep its transcript.
 
-## App Store
-
-On Record is distributed through Apple’s App Store. Apple handles downloads and any purchases under its own terms and [privacy policy](https://www.apple.com/legal/privacy/). I receive only the aggregated sales and usage reports Apple provides to developers, which do not identify you.
+Deleting the app removes the data it keeps on that device. To remove data
+from iCloud too, delete your meetings in the app first, or manage your
+iCloud storage in your device’s Settings.
 
 ## Children
 
-On Record is not directed at children and does not knowingly collect information from anyone.
+The app isn’t directed at children and collects no data from anyone.
 
-## Your rights and choices
+## Changes
 
-Because I don’t collect or hold your personal data, there is nothing for me to access, correct or delete on your behalf. You control your data directly: delete a meeting in On Record and everything made exclusively from it is deleted with it, and you can manage On Record’s iCloud data in your device’s iCloud settings. Deleting the app removes its data from that device.
-
-If you contact me by email, I use your message only to reply to you, and I delete it when it is no longer needed. You can ask me to delete our correspondence at any time.
-
-## Changes to this policy
-
-If On Record’s handling of information changes — for example, if a future version adds an optional online feature — this policy will be updated before that version is released, and the effective date above will change.
+If this policy changes, we’ll update this page and its date.
 
 ## Contact
 
-Questions about privacy: [support@chrisgonzalez.net](mailto:support@chrisgonzalez.net?subject=On%20Record%20privacy).
+Questions about privacy: [support@chrisgonzalez.net](mailto:support@chrisgonzalez.net?subject=On%20Record%20privacy)

@@ -124,10 +124,10 @@ export const apps: App[] = [
     slug: 'on-record',
     name: 'On Record',
     shortName: 'On Record',
-    tagline: 'Private meeting notes, made on your Mac.',
+    tagline: 'Meeting notes you can check, written with Apple Intelligence.',
     summary:
-      'On Record listens to your meetings and writes them up — summary, decisions, action items and a full transcript — with every point linked to the moment it was said. All of it is made on your own Mac.',
-    seoTitle: 'On Record — Private AI Meeting Notes for Mac, iPhone, iPad & Apple Watch',
+      'On Record listens to your meetings and writes them up — summary, decisions, action items and a full transcript — with every point linked to the moment it was said. No account, no On Record servers and no meeting bot.',
+    seoTitle: 'On Record — AI Meeting Notes You Can Check, for Mac, iPhone, iPad & Apple Watch',
     flagship: true,
     icon: '/icons/on-record.svg',
     iconAlt: 'On Record app icon: coral audio bars turning into navy lines of notes',
@@ -137,78 +137,84 @@ export const apps: App[] = [
     status: 'coming-soon',
     statusNote: 'Coming soon to the App Store',
     stores: [
-      // The listing (id6822120030) is created but not public until 1.0 is released.
+      // The listing (id6822120030) exists but is not public yet (it returned 404 on 2026-11-04).
       // When it goes live: set url to 'https://apps.apple.com/app/id6822120030' and status to 'available'.
       { kind: 'app-store', url: undefined, platforms: ['mac', 'iphone', 'ipad', 'watch'] },
     ],
     applicationCategory: 'BusinessApplication',
-    operatingSystem: 'macOS 15, iOS 18, iPadOS 18, watchOS 11',
+    operatingSystem: 'macOS 27, iOS 27, iPadOS 27, watchOS',
     requirements: [
-      'A Mac with Apple silicon running macOS 15 or later does the transcription and writing up.',
-      'iPhone and iPad (iOS / iPadOS 18 or later) and Apple Watch (watchOS 11 or later) record and show results. They need On Record on your Mac, signed in to the same iCloud account.',
-      'Language models are downloaded once from inside the Mac app.',
+      'Summaries, actions, decisions and Ask need a Mac, iPhone or iPad with Apple Intelligence turned on, running macOS 27, iOS 27 or iPadOS 27, and an internet connection.',
+      'Any of your devices can do the work. Signed in to the same iCloud account, your library syncs between them, and a meeting recorded on one device can be written up on another.',
+      'Without Apple Intelligence, a device still records, transcribes where Apple’s speech recognition supports it, plays and searches. Another of your devices with Apple Intelligence writes the meetings up.',
+      'Apple Watch records through your iPhone.',
       'Made for meetings in English.',
     ],
-    hero: { src: orSummary, alt: 'On Record on iPhone showing the summary of a meeting called Q4 Launch Planning, with each point linked to its source in the recording', frame: 'phone' },
+    hero: { src: orSummary, alt: 'On Record on iPhone showing the summary of a meeting called Q4 Launch Planning, with each topic linked to its source in the recording', frame: 'phone' },
     overview: [
-      'On Record turns a recording into a clear write-up: a summary, the decisions that were made, the action items with owners and due dates, and a full transcript with who said what.',
+      'On Record listens to your meetings and writes them up: a clear summary, the decisions that were made, the action items with owners and due dates, and a full transcript with who said what.',
       'Every point links back to the exact moment it was said, so you can check it with one tap instead of taking the AI’s word for it.',
-      'Transcription, speaker detection and the AI writing all run on your own Mac, using models you download once. There are no On Record servers, no account to create and no meeting bot joining your calls.',
+      'Transcription and speaker detection run on your device. To write summaries, actions and answers, On Record sends the transcript text to Apple’s Private Cloud Compute, which doesn’t keep it — and only if you turn this on. Audio and voices are never sent to any AI service. No account to create, no On Record servers, and no meeting bot joining your calls.',
     ],
     features: [
       {
         title: 'Check every point',
         body: 'Each summary point, decision and action item links to the moment in the recording. Tap to hear it, or jump to that line in the transcript.',
-        points: [
-          'Points that need a second look are marked, so you can confirm or reject them.',
-          'Correct the transcript any time — the original is always kept.',
-        ],
+        points: ['Correct the transcript any time — the original is always kept.'],
         shot: { src: orTranscript, alt: 'On Record transcript on iPhone, split by speaker, with a play button on every line', frame: 'phone' },
       },
       {
         title: 'Never lose an action item',
         body: 'Who owes what, and by when — each action item carries its owner, due date and a link to the moment it was agreed.',
-        points: ['Decisions are kept apart from the discussion.', 'Browse every decision across all your meetings.'],
+        points: ['Decisions are kept apart from the discussion.', 'Every decision from every meeting in one place.'],
         shot: { src: orActions, alt: 'On Record action items on iPhone with owners, due dates and links to the recording', frame: 'phone' },
       },
       {
         title: 'Private by design',
-        body: 'The AI runs on your Mac. Your recordings and results never touch an On Record server, and your meetings are never used for advertising, tracking or AI training.',
+        body: 'Transcription and speaker detection run on your device. Summaries, actions and answers are written by Apple Intelligence on Apple’s Private Cloud Compute, which doesn’t keep your transcript. Audio and voices are never sent to any AI service.',
         points: [
-          'iPhone, iPad and Apple Watch recordings reach your Mac through your own iCloud, and results come back the same way.',
-          'No account, no sign-up, no meeting bot.',
+          'Your library syncs between your own devices through your iCloud account, with recordings and voice profiles encrypted with your own library key.',
+          'No account, no On Record servers, no meeting bot. On Record collects no data.',
         ],
-        shot: { src: orMacSummary, alt: 'On Record for Mac showing a meeting summary with topics, decisions and actions', frame: 'window' },
+        shot: { src: orMacSummary, alt: 'On Record for Mac showing a meeting summary with topics, decisions and actions, each with a link to its moment', frame: 'window' },
       },
       {
         title: 'Ask your meetings',
-        body: 'Type or say a question — “What did we decide about the launch date?” or “What did I promise Priya?” — and get a straight answer with links to the meetings and moments it came from.',
-        shot: { src: orAsk, alt: 'Ask in On Record on iPhone, with suggested questions such as What did I promise to do?', frame: 'phone' },
+        body: 'Type or say a question — “What did we decide about the launch date?” or “What did I promise Priya?” — and get a straight answer with links to the moments it came from. If your meetings don’t answer it, On Record says so instead of guessing.',
+        shot: { src: orAsk, alt: 'Ask in On Record on iPhone, answering a question with quotes from the meetings it came from', frame: 'phone' },
       },
     ],
     useCases: [
       { title: 'Team meetings', body: 'Leave with the decisions and the action items already written down, with owners and due dates wherever they were said.' },
       { title: 'Client and sales calls', body: 'Record your microphone together with the call audio from Zoom, Teams, Webex or any other app on your Mac.' },
       { title: 'Interviews', body: 'A transcript split by speaker, where every line plays back the moment it was said.' },
-      { title: 'Lectures and courses', body: 'Group recordings into courses and series, then ask questions across all of them.' },
+      { title: 'Lectures and courses', body: 'Start a recording from Apple Watch. With On Record Pro, group lectures into courses and ask questions across all of them.' },
     ],
     gallery: [
       { src: orMacTranscript, alt: 'On Record for Mac transcript view, split by speaker with timestamps', frame: 'window', caption: 'Know exactly who said what.' },
-      { src: orMacAsk, alt: 'Ask on the Mac answering What did we decide about the launch date? with quoted sources', frame: 'window', caption: 'Answers with the moments they came from.' },
-      { src: orMacMeetings, alt: 'On Record for Mac meetings list with action and decision counts', frame: 'window', caption: 'Every meeting, written up.' },
-      { src: orMacPeople, alt: 'On Record for Mac People list showing everyone you meet with', frame: 'window', caption: 'Name a voice once; On Record suggests it next time.' },
+      { src: orMacAsk, alt: 'Ask on the Mac answering What did we decide about offline mode? with quoted sources', frame: 'window', caption: 'Answers with the moments they came from.' },
+      { src: orMacMeetings, alt: 'On Record for Mac Home list of recent meetings with action and decision counts', frame: 'window', caption: 'Every meeting, written up.' },
+      { src: orMacPeople, alt: 'On Record for Mac People list showing everyone you meet with', frame: 'window', caption: 'Name a voice once; it’s recognized in later meetings.' },
       { src: orDecisions, alt: 'On Record Library on iPhone listing decisions from every meeting', frame: 'phone', caption: 'Every decision in one place.' },
-      { src: orMeetings, alt: 'On Record Meetings list on iPhone, with items that need review', frame: 'phone', caption: 'Record here. Your Mac writes it up.' },
-      { src: orWatch, alt: 'On Record on Apple Watch with a large Record button', frame: 'watch', caption: 'Start, pause and stop from your wrist.' },
+      { src: orMeetings, alt: 'On Record Meetings list on iPhone, each meeting saved on this iPhone and ready', frame: 'phone', caption: 'Record wherever you are.' },
+      { src: orWatch, alt: 'On Record on Apple Watch with a large Record button and today’s action', frame: 'watch', caption: 'Start, pause and stop from your wrist.' },
     ],
     faq: [
       {
         q: 'Do I need a Mac?',
-        a: 'Yes. A Mac with Apple silicon does the transcription and writing up. iPhone, iPad and Apple Watch record and show the results; they need On Record on your Mac, signed in to the same iCloud account. It is the same app on every device.',
+        a: 'No. A Mac, iPhone or iPad with Apple Intelligence, running macOS 27, iOS 27 or iPadOS 27, writes up your meetings. Any of your devices can do the work, and the others show the results. Apple Watch records through your iPhone.',
+      },
+      {
+        q: 'What is sent to Apple Intelligence?',
+        a: 'The transcript text, the vocabulary and names you entered, and your questions go to Apple’s Private Cloud Compute, which doesn’t keep them — and only if you turn this on. Audio and voices are never sent to any AI service.',
       },
       {
         q: 'Where do my recordings go?',
-        a: 'They stay on your devices. Recordings from iPhone, iPad and Apple Watch travel to your Mac through your own iCloud account, and results come back the same way. There is no On Record server.',
+        a: 'They stay on your devices and in your own iCloud account. Your library syncs between your devices through your iCloud private database, and recordings are encrypted with your own library key before they leave your device. There is no On Record server.',
+      },
+      {
+        q: 'Is it free?',
+        a: 'Free gives you unlimited recording and transcripts, and the full write-up and Ask on 5 meetings. On Record Pro is a one-time purchase for all your devices, shared with your family. It adds write-ups on every meeting, Ask across meetings, series, projects and courses, and more.',
       },
       {
         q: 'Do I need an account?',
@@ -224,7 +230,7 @@ export const apps: App[] = [
       },
       {
         q: 'Can I share a meeting?',
-        a: 'Yes, when you choose to. Export a meeting as a PDF or text, with or without the transcript and the original audio, and send it however you like.',
+        a: 'Yes, when you choose to. With On Record Pro, export a meeting as a PDF, Markdown or text and send it however you like. It goes only where you send it.',
       },
       {
         q: 'Is it legal to record a meeting?',
@@ -233,31 +239,64 @@ export const apps: App[] = [
     ],
     support: [
       {
-        q: 'My iPhone recordings are not being transcribed',
-        a: 'Transcription happens on your Mac. Install On Record on a Mac with Apple silicon, sign in to the same iCloud account on both devices, and open On Record on the Mac. Recordings waiting to send are kept safely on the iPhone until the Mac picks them up.',
+        q: 'How do I get started?',
+        a: 'Open On Record. When it explains how it uses Apple Intelligence, tap Turn On (you can change this later in Settings). Press Record during a meeting — on the Mac you can also choose File → Import Audio… or drop an audio file on the Meetings list. Then open the meeting for its Summary, Notes, Actions, Decisions and Transcript, and tap or click a time to hear the moment it came from.',
       },
       {
-        q: 'Nothing is written up after a recording on the Mac',
-        a: 'Open Settings → Models on the Mac and check that a language model is downloaded. The meeting’s Processing tab shows each step and any that need attention.',
+        q: 'A meeting says “Apple’s daily limit reached”',
+        a: 'Apple limits how much Private Cloud Compute each person can use in a day. Your transcript is ready, and On Record finishes the meeting on its own later. Nothing is lost.',
       },
       {
-        q: 'Call audio from Zoom or Teams is missing',
-        a: 'Allow System Audio Recording when macOS asks, or turn it on for On Record in System Settings → Privacy & Security → Screen & System Audio Recording. Then start the recording in On Record.',
+        q: 'A meeting says “Waiting for an Apple Intelligence device”',
+        a: 'This device can’t write it up. Open On Record on a Mac, iPhone or iPad with Apple Intelligence, signed in to the same iCloud account. If the device supports Apple Intelligence but runs an older system, update it to version 27.',
       },
       {
-        q: 'A speaker is named wrongly',
-        a: 'Open the meeting, choose the speaker and pick the right person. On Record uses names you confirm to suggest speakers in future meetings, and you can rename, merge or delete people at any time.',
+        q: 'A meeting says “Transcript ready” with no summary',
+        a: 'Apple Intelligence processing is off. Turn it on in Settings → Privacy & Apple Intelligence (Mac) or Settings → Apple Intelligence (iPhone and iPad), or turn on Apple Intelligence in your device’s Settings.',
       },
       {
-        q: 'A word is transcribed wrongly every time',
-        a: 'Add the name or acronym under Vocabulary in On Record’s Settings on the Mac. You can also correct the transcript directly; the original is always kept.',
+        q: 'A meeting says “Part declined”',
+        a: 'Apple’s service declined part of the meeting. Use Retry this part. The rest of the meeting is kept.',
+      },
+      {
+        q: 'My meetings don’t appear on my other device',
+        a: 'Check that both devices use the same iCloud account and that iCloud is on for On Record. On the Mac, Settings → Sync → Sync Now checks right away. Recordings and voice profiles also need iCloud Keychain, which holds the key that opens them.',
+      },
+      {
+        q: 'The Mac doesn’t record the call audio',
+        a: 'Turn on other apps’ audio in Settings → Recording, and allow it when macOS asks, or in System Settings → Privacy & Security.',
+      },
+      {
+        q: 'Who said what is wrong',
+        a: 'Open the meeting and name the speakers. With Pro, named voices are recognized in later meetings.',
+      },
+      {
+        q: 'A word or name is transcribed wrong',
+        a: 'Correct the line in the transcript. The original is always kept. You can also add the word to your vocabulary so it’s spelled right next time.',
+      },
+      {
+        q: 'How do I stop syncing voice profiles?',
+        a: 'Turn off Voice profiles under What Syncs in Settings. Deleting a voice profile deletes it on all your devices.',
+      },
+      {
+        q: 'How do I delete a meeting?',
+        a: 'On the Mac, open it and choose Delete Meeting…. On iPhone or iPad, use Delete Everywhere. It’s removed from all your devices and from your iCloud.',
+      },
+      {
+        q: 'How do I buy or restore On Record Pro?',
+        a: 'On iPhone and iPad, go to Settings → On Record Pro; on the Mac, Settings → Privacy & Apple Intelligence → On Record Pro. Use Restore Purchases on a new device. Meetings that waited for Pro are processed after you buy it. Free includes the full write-up and Ask on 5 meetings, counted across all your devices; deleting a meeting doesn’t give one back.',
+      },
+      {
+        q: 'How do I send diagnostics?',
+        a: 'The diagnostics list what the app did, with error codes and counts only, and never include meeting content. Copy them from the Diagnostics section of Settings (on the Mac, Settings → Advanced) and paste them into an email to us.',
       },
     ],
     privacyHighlights: [
-      'No account, no analytics, no advertising, no tracking.',
-      'Transcription and AI writing run on your Mac.',
-      'Recordings move between your devices only through your own iCloud.',
-      'Your meetings are never used to train AI.',
+      'No account, no On Record servers, no analytics, no advertising, no tracking.',
+      'Transcription and speaker detection run on your device.',
+      'Only transcript text, context you enter and your questions go to Apple’s Private Cloud Compute — and only if you turn it on.',
+      'Audio and voices are never sent to any AI service.',
+      'Your library syncs only through your own iCloud account.',
     ],
   },
   {
