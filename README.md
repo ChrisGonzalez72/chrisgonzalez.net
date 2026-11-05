@@ -56,6 +56,13 @@ button, the structured data and the press kit update automatically. To show Appl
 badge, download it unmodified from Apple's marketing tools into `public/badges/app-store.svg` and
 add `'app-store'` to `OFFICIAL_BADGES` in `src/components/StoreButtons.astro`.
 
+**Pilot Buddy goes live.** In `src/config/apps.ts`, on the `pilot-buddy` entry set the App Store
+`url: 'https://apps.apple.com/app/id6828184019'` and/or the Google Play `url`, then set `status: 'available'`
+and update `statusNote` (it currently says "Coming soon to the App Store and Google Play").
+
+**ATLsim – CoPilot store link.** Paste the Microsoft Store listing URL into the `atlsim-copilot` store
+entry in `src/config/apps.ts` to turn "Available on the Microsoft Store" into a download button.
+
 **Add a new app.** Add an entry to `apps` in `src/config/apps.ts`, put its screenshots in
 `src/assets/apps/<slug>/`, its icon in `public/icons/`, and its privacy policy in
 `src/content/privacy/<slug>.md`. The product page, support page, privacy page, cards, footer
