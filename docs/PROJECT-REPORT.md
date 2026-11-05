@@ -5,6 +5,53 @@ tested, the app store compliance checklist, and what still needs Chris._
 
 ---
 
+## Status update — 2026-11-05
+
+Sections 1–8 below describe the site as built on 2026-10-23. Since then two products changed in
+ways that affect the store checklist. Where this section and the older sections disagree, this
+section is current.
+
+**On Record 2.0** (site updated 2026-11-04, PR #5)
+- Requires macOS 27, iOS 27 or iPadOS 27 with Apple Intelligence for write-ups (was macOS 15+ /
+  iOS 18+ with on-device models). Transcript text goes to Apple's Private Cloud Compute only if the
+  user turns it on; audio and voices never do. The privacy policy (effective 2026-11-04) says so.
+- **Now has an in-app purchase**: On Record Pro, a one-time non-consumable with Family Sharing;
+  Free covers write-ups and Ask on 5 meetings. Section 6's "Free, no IAP today" no longer
+  applies. The new checklist rows are below.
+- App Store listing id6822120030 still not public (404 on 2026-11-04), so status stays
+  "Coming soon".
+
+**Pilot Buddy** (site updated 2026-10-28, PR #3)
+- Now **iPhone, iPad and Android**, with an App Store record (id6828184019). Finding 1 in section 1
+  ("Pilot Buddy is an Android app") is out of date. Status: "Coming soon to the App Store and
+  Google Play".
+
+### Checklist additions
+
+| App / store | Item | Status | Notes |
+|---|---|---|---|
+| On Record — App Store | In-app purchase disclosure (3.1.1, 3.1.2) | ✅ | Free vs Pro explained on the product page, FAQ and support; Pro is one-time, not a subscription. |
+| On Record — App Store | Restore Purchases (3.1.1) | ✅ | Documented on the support page (Settings → On Record Pro → Restore Purchases). |
+| On Record — App Store | IAP in privacy policy | ✅ | "In-app purchase" section: Apple handles payment; developer receives no payment or personal data. |
+| On Record — App Store | App Privacy details | ⏳ | Still "Data Not Collected"; recheck the answers in App Store Connect against 2.0 (Private Cloud Compute, IAP) before you submit. |
+| On Record — App Store | IAP product review | ⏳ | Submit the On Record Pro product with the 2.0 build (needs screenshot and review notes). |
+| Pilot Buddy — App Store | Privacy Policy URL | ✅ | `https://chrisgonzalez.net/apps/pilot-buddy/privacy/` (policy covers iPhone/iPad since 2026-10-28). |
+| Pilot Buddy — App Store | Support URL | ✅ | `https://chrisgonzalez.net/apps/pilot-buddy/support/` |
+| Pilot Buddy — App Store | Marketing URL | ✅ | `https://chrisgonzalez.net/apps/pilot-buddy/` |
+| Pilot Buddy — App Store | App Privacy details | ⏳ | Answer "Data Not Collected" (no networking code, no permissions). |
+| Pilot Buddy — App Store | Store link | ⏳ | On release set `url: 'https://apps.apple.com/app/id6828184019'` and `status: 'available'` in `src/config/apps.ts`. |
+
+### Open items still unresolved (from section 7)
+
+O-1 (support mailbox), O-3 (On Record URLs and App Privacy in App Store Connect), O-5 (CoPilot web
+service, which cannot run on GitHub Pages), O-6 (Pilot Buddy Android application ID), O-7 (shared
+headset icon), O-8 (legal review), O-9 (On Record release-day switch) and O-10 (Microsoft Store
+listing URL for ATLsim – CoPilot). O-5 and O-10 affect an app that is live today. The site has been
+published on GitHub Pages since 2026-11-03, so the CoPilot web service URL on this domain no longer
+reaches the service: cloud checklists fail for any user who turns them on until O-5 is done.
+
+---
+
 ## 1. Assessment of the starting point
 
 **The website.** The repository held only a one-line README and a GitHub Pages `CNAME` for
@@ -106,7 +153,7 @@ consent notice; gallery of Mac, iPhone and Watch screens; FAQ written for App St
 
 | Decision | Why |
 |---|---|
-| **Astro 7, static output** | Content site with almost no interactivity: ships zero framework JS, builds to plain HTML for GitHub Pages, typed content collections. Astro ≤7.3.1 has a critical advisory, so 7.4.2 is used (`npm audit`: 0 vulnerabilities). Next.js was considered and rejected: more runtime and complexity for no benefit here. |
+| **Astro 7, static output** | Content site with almost no interactivity: ships zero framework JS, builds to plain HTML for GitHub Pages, typed content collections. Astro ≤7.3.1 has a critical advisory, so 7.4.x is used (7.4.6 as of 2026-11-05) (`npm audit`: 0 vulnerabilities). Next.js was considered and rejected: more runtime and complexity for no benefit here. |
 | **No Tailwind, hand-written CSS tokens** | One small stylesheet + scoped component styles; easier to keep the two themes exact. |
 | **Central product registry** (`src/config/apps.ts`) | One typed entry drives page, cards, support, store buttons, structured data, sitemap. A fourth app is one entry + screenshots + a Markdown policy. |
 | **Markdown for policies and updates** | Lightweight, reviewable in pull requests; no CMS or database. |
