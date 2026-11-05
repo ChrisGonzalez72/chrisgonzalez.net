@@ -22,6 +22,9 @@ section is current.
   "Coming soon".
 
 **Pilot Buddy** (site updated 2026-10-28, PR #3)
+- Open Graph image tagline changed from "Flight planning, simplified." to the site tagline "Your
+  flight sim co-pilot." on 2026-11-05. The app's own home screen (shown in the image and screenshots)
+  still reads "Flight planning, simplified."; change it in the app if you want them to match.
 - Now **iPhone, iPad and Android**, with an App Store record (id6828184019). Finding 1 in section 1
   ("Pilot Buddy is an Android app") is out of date. Status: "Coming soon to the App Store and
   Google Play".
@@ -253,7 +256,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | **O-3** | **Enter the three URLs in App Store Connect** (both iOS and macOS versions) and publish App Privacy. | Required before submitting On Record 1.0. |
 | O-4 | Review copy that speaks for you: the About page, the homepage "About the developer" section and the three principles. They use only what the repositories show; add background, location, photo or LinkedIn if you want them. | The brief asked for no invented credentials, so the bio is deliberately modest. |
 | **O-5** | **CoPilot's web service** (cloud sharing is still offered, off by default): `chrisgonzalez.net/CoPilotChecklistWS/Copilot-checklist.asmx` cannot run on GitHub Pages. Before pointing the domain at Pages, host the service on a subdomain (e.g. `api.chrisgonzalez.net`) and ship an app update with the new endpoint. Also point the app's privacy link to `/apps/atlsim-copilot/privacy/` and the Store listing's privacy URL to the same page. | Users who turn cloud sharing on would get errors once the domain moves. |
-| O-6 | Pilot Buddy: decide on Google Play; if yes, change the application ID and complete the Data safety form. Site status says "Not yet on Google Play". | Avoids promising a release that isn't planned. |
+| O-6 | Pilot Buddy: decide on Google Play; if yes, change the application ID and complete the Data safety form. Site status now says "Coming soon to the App Store and Google Play" (iOS added 2026-10-28). | Avoids promising a release that isn't planned. |
 | O-7 | Pilot Buddy and CoPilot use the same headset logo. Consider a distinct icon for one of them. | Product recognition. |
 | O-8 | Legal review of the three product privacy policies, site privacy/cookie policies and terms. They are written from verified app behaviour but are not legal advice. | Requested by the brief. |
 | O-9 | On release day: set On Record `status: 'available'` and its store URL; add Apple's official badge; post an update. | See README → "On Record goes live". |
