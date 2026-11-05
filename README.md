@@ -60,8 +60,8 @@ add `'app-store'` to `OFFICIAL_BADGES` in `src/components/StoreButtons.astro`.
 `url: 'https://apps.apple.com/app/id6828184019'` and/or the Google Play `url`, then set `status: 'available'`
 and update `statusNote` (it currently says "Coming soon to the App Store and Google Play").
 
-**ATLsim – CoPilot store link.** Paste the Microsoft Store listing URL into the `atlsim-copilot` store
-entry in `src/config/apps.ts` to turn "Available on the Microsoft Store" into a download button.
+**ATLsim – CoPilot store link.** Done: the `atlsim-copilot` store entry in `src/config/apps.ts` links
+to the Microsoft Store listing (`https://apps.microsoft.com/detail/9P5HVJ5X6V9J`, product ID `9P5HVJ5X6V9J`).
 
 **Add a new app.** Add an entry to `apps` in `src/config/apps.ts`, put its screenshots in
 `src/assets/apps/<slug>/`, its icon in `public/icons/`, and its privacy policy in

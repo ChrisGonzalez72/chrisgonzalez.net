@@ -392,8 +392,9 @@ export const apps: App[] = [
     platforms: ['windows'],
     status: 'available',
     statusNote: 'Available on the Microsoft Store',
-    // CONFIRM: paste the listing URL (https://apps.microsoft.com/detail/<product-id>) to turn the status into a download button.
-    stores: [{ kind: 'microsoft-store', url: undefined, platforms: ['windows'] }],
+    // Microsoft Store product ID 9P5HVJ5X6V9J (deep link: ms-windows-store://pdp/?productid=9P5HVJ5X6V9J).
+    // The web URL is used because it works on every OS and hands off to the Store app on Windows.
+    stores: [{ kind: 'microsoft-store', url: 'https://apps.microsoft.com/detail/9P5HVJ5X6V9J', platforms: ['windows'] }],
     applicationCategory: 'GameApplication',
     operatingSystem: 'Windows 10 or later',
     requirements: [

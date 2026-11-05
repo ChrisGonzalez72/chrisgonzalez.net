@@ -48,8 +48,8 @@ section is current.
 
 O-1 (support mailbox), O-3 (On Record URLs and App Privacy in App Store Connect), O-5 (CoPilot web
 service, which cannot run on GitHub Pages), O-6 (Pilot Buddy Android application ID), O-7 (shared
-headset icon), O-8 (legal review), O-9 (On Record release-day switch) and O-10 (Microsoft Store
-listing URL for ATLsim – CoPilot). O-5 and O-10 affect an app that is live today. The site has been
+headset icon), O-8 (legal review), and O-9 (On Record release-day switch). O-10 (Microsoft Store
+listing URL) was closed on 2026-11-05. O-5 affects an app that is live today. The site has been
 published on GitHub Pages since 2026-11-03, so the CoPilot web service URL on this domain no longer
 reaches the service: cloud checklists fail for any user who turns them on until O-5 is done.
 
@@ -68,7 +68,7 @@ preserve. The `CNAME` was kept (now `public/CNAME`) so the domain keeps resolvin
 | Source | `ChrisGonzalez72/OnRecord` (Swift, active daily) | `ChrisGonzalez72/PilotBuddy` (Java, Oct 2026) | `ChrisGonzalez72/CoPilot-Checklist-v3` (C#/.NET 6 WPF, last commit Jan 2023) |
 | What it does | Records meetings on Mac/iPhone/iPad/Watch; transcribes, detects speakers and writes summaries, decisions, actions with on-device AI on the Mac; every point links to its moment; Ask across meetings | Turn calculator (90/180/270°), crosswind/headwind calculator, offline airport lookup (≈48,000 airports with runways and frequencies) | Voice-driven challenge/response checklists for flight simulators (Windows speech), checklist editor, optional cloud sharing with username + email |
 | Platforms | macOS 15+, iOS/iPadOS 18+, watchOS 11+ (Apple silicon Mac required) | Android 7.1+ (minSdk 25) | Windows 10 1607+ (MSIX package) |
-| Release status | App Store record created (id6822120030), v1.0 in TestFlight, **not yet released** | **Not published** (package id is still `com.example.pilotbuddy`) | **On the Microsoft Store** (confirmed by Chris 2026-10-23; listing URL still to add) |
+| Release status | App Store record created (id6822120030), v1.0 in TestFlight, **not yet released** | **Not published** (package id is still `com.example.pilotbuddy`) | **On the Microsoft Store** (product ID 9P5HVJ5X6V9J, linked 2026-11-05) |
 | Data handling | "Data Not Collected"; iCloud private DB sync; model downloads from Hugging Face | Requests **no permissions** (no internet) | Cloud checklists optional and **off by default**; when on, username + email + shared checklists go to a web service at `chrisgonzalez.net/CoPilotChecklistWS/…` |
 
 Two findings differ from the brief and shaped the site:
@@ -260,7 +260,7 @@ Legend: ✅ done on the site · ⏳ pending (Chris) · ◻ conditionally require
 | O-7 | Pilot Buddy and CoPilot use the same headset logo. Consider a distinct icon for one of them. | Product recognition. |
 | O-8 | Legal review of the three product privacy policies, site privacy/cookie policies and terms. They are written from verified app behaviour but are not legal advice. | Requested by the brief. |
 | O-9 | On release day: set On Record `status: 'available'` and its store URL; add Apple's official badge; post an update. | See README → "On Record goes live". |
-| O-10 | **Confirmed 2026-10-23:** ATLsim – CoPilot is `CoPilot-Checklist-v3`, it is on the Microsoft Store, and cloud sharing is optional and off by default. **Still needed: the Store listing URL** — paste it into the `atlsim-copilot` store entry in `src/config/apps.ts` to turn the status into a download button. | The site says "Available on the Microsoft Store" without a link until then. |
+| O-10 | ✅ **Done 2026-11-05.** ATLsim – CoPilot is `CoPilot-Checklist-v3` on the Microsoft Store (product ID `9P5HVJ5X6V9J`). The `atlsim-copilot` store entry in `src/config/apps.ts` now links to `https://apps.microsoft.com/detail/9P5HVJ5X6V9J`, so the status shows a download button. | — |
 
 ---
 
