@@ -137,7 +137,7 @@ if __name__ == "__main__":
     or_icon = PUB / "press" / "on-record" / "on-record-icon-1024.png"
     product("on-record", "On Record", "Meeting notes you can check, written with Apple Intelligence.", or_icon, CORAL,
             ASSETS / "on-record" / "iphone-summary.png", "phone")
-    product("pilot-buddy", "Pilot Buddy", "Flight planning, simplified.", PUB / "icons" / "pilot-buddy.png", (91, 123, 224),
+    product("pilot-buddy", "Pilot Buddy", "Your flight sim co-pilot.", PUB / "icons" / "pilot-buddy.png", (91, 123, 224),
             ASSETS / "pilot-buddy" / "home-dark.png", "phone")
     product("atlsim-copilot", "ATLsim – CoPilot", "Voice-controlled checklists for your flight simulator.",
             PUB / "icons" / "atlsim-copilot.png", (45, 140, 255), ASSETS / "atlsim-copilot" / "run-checklist.png", "window")
