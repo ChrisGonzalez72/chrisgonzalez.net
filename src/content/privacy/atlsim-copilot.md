@@ -1,6 +1,6 @@
 ---
 app: atlsim-copilot
-effective: 2026-11-05
+effective: 2026-11-12
 summary: ATLsim – CoPilot Checklist keeps your checklists, settings and voice on your PC. If you choose to sign in to the optional Community feature, an account, your display name and what you share are stored.
 ---
 
