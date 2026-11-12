@@ -46,7 +46,7 @@ Aircraft you share, your display name and the average rating are visible to ever
 
 Sign-in uses your web browser and Microsoft’s sign-in service; the app never sees your password. The service checks every sign-in token before it accepts a request. To limit abuse, the service briefly keeps your network address in memory to count requests; it is never logged or stored.
 
-Data is kept until you delete it. Deleted data may remain in database backups for a short time. The service is hosted in Microsoft Azure in [REGION]. Nothing is sold or shared with anyone except Microsoft, which hosts the service.
+Data is kept until you delete it. Deleted data may remain in database backups for a short time. The service is hosted in Microsoft Azure in the East US region. Nothing is sold or shared with anyone except Microsoft, which hosts the service.
 
 ## Cloud Checklists (retired)
 
