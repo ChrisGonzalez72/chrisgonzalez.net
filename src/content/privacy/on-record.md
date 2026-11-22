@@ -9,8 +9,10 @@ policy covers On Record 2.0 for Mac, iPhone, iPad and Apple Watch.
 
 ## The short version
 
-We don’t collect any data from the app. There are no On Record servers, no
-accounts, no analytics, no advertising and no tracking.
+We don’t collect any data from the app in the background. There are no On
+Record servers, no accounts, no analytics, no advertising and no tracking. The
+one exception is a support report that you choose to send yourself; see
+Diagnostics below.
 
 Your recordings and everything made from them stay on your devices and in
 your own iCloud account, which we can’t access.
@@ -101,7 +103,7 @@ own iCloud account.
 ## Network connections
 
 The app connects only to Apple’s services:
-- iCloud, for sync;
+- iCloud, for sync and for a support report you choose to send;
 - Private Cloud Compute, when Apple Intelligence processing is on;
 - the App Store, for the purchase.
 
@@ -111,9 +113,18 @@ It makes no other network connections, and it downloads no models.
 
 Each device keeps diagnostics that list what the app did, with error codes
 and counts only. They never include meeting content, titles, names or file
-paths, and the app never sends them anywhere. If you want to send them to
-us, you can copy them yourself from the Diagnostics section of Settings
-(on the Mac, **Settings → Advanced**) and send them by email.
+paths, and the app never sends them on its own.
+
+On iPhone and iPad, **Settings → Diagnostics Log → Send to Support** lets you
+send a support report to us. Nothing is sent until you tap **Send Report**, and
+the screen says what it contains: the app and system version, the device
+model, each meeting’s processing steps with error codes, what the system
+reported about the app stopping, and the diagnostics log. It never includes
+meeting content, titles, names, transcripts or audio. It is uploaded to a
+private database in our iCloud container that only we can read, and we use it
+only to find and fix the problem you reported. You can choose to send it by
+email instead. On the Mac, you can copy the diagnostics yourself from
+**Settings → Advanced** and send them by email.
 
 ## Sharing and exporting
 
@@ -132,7 +143,7 @@ iCloud storage in your device’s Settings.
 
 ## Children
 
-The app isn’t directed at children and collects no data from anyone.
+The app isn’t directed at children and collects no data from anyone beyond a support report a person chooses to send.
 
 ## Changes
 
