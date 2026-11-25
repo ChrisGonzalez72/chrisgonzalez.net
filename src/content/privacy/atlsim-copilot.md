@@ -1,7 +1,7 @@
 ---
 app: atlsim-copilot
-effective: 2026-11-12
-summary: ATLsim – CoPilot Checklist keeps your checklists, settings and voice on your PC. If you choose to sign in to the optional Community feature, an account, your display name and what you share are stored.
+effective: 2026-11-25
+summary: ATLsim – CoPilot Checklist keeps your checklists, settings and voice on your PC. You sign in with an account to use the app, and the service stores that account, your display name and anything you share.
 ---
 
 This policy covers **CoPilot Checklist**, part of the ATLsim – CoPilot series for Windows, distributed through the Microsoft Store and made by Chris Gonzalez, an independent developer ("I", "me"). It explains what information the app uses, where it is kept, and the choices you have.
@@ -11,7 +11,7 @@ This policy covers **CoPilot Checklist**, part of the ATLsim – CoPilot series 
 - Your checklists, aircraft and settings stay on your PC.
 - Your voice is recognized on your PC by Windows. It is never recorded, kept or sent anywhere.
 - The app has no advertising, no analytics and no tracking, and it doesn’t send error reports to me or anyone else.
-- The optional **Community** feature is the only part that connects to a service. Browsing and downloading shared aircraft needs no account. If you sign in, share an aircraft or rate one, the information listed under “The optional Community feature” below is stored.
+- You sign in with an account to use the app. Signing in, and the **Community** feature (browsing, sharing and rating aircraft), are the only parts that connect to a service. The information listed under “Signing in and the Community feature” below is stored. Your checklists are not sent to it unless you share them.
 
 ## Information that stays on your PC
 
@@ -29,9 +29,9 @@ CoPilot Checklist uses your microphone to hear your checklist responses and voic
 
 Speech recognition and speech use the speech engines built into Windows and run on your PC. CoPilot Checklist does not record or keep audio, and no audio or recognized speech is sent to me or anyone else. You can stop the app listening at any time by saying “Stop listening”.
 
-## The optional Community feature
+## Signing in and the Community feature
 
-CoPilot Checklist connects to the service I run only when you use the Community page. You can browse and download aircraft other people have shared without an account. If you choose to **sign in**, share an aircraft, or rate one, the following is stored:
+CoPilot Checklist asks you to **sign in** with an account before you can use it. It connects to the service I run to sign you in and when you use the Community page. When you sign in, and if you share an aircraft or rate one, the following is stored:
 
 | What | Why | Where |
 |---|---|---|
@@ -44,7 +44,7 @@ CoPilot Checklist connects to the service I run only when you use the Community 
 
 Aircraft you share, your display name and the average rating are visible to everyone using the Community page. Don’t put personal information in a shared aircraft.
 
-Sign-in uses your web browser and Microsoft’s sign-in service; the app never sees your password. The service checks every sign-in token before it accepts a request. To limit abuse, the service briefly keeps your network address in memory to count requests; it is never logged or stored.
+Sign-in uses your web browser and Microsoft’s sign-in service; the app never sees your password. The sign-in window has a “Keep me signed in on this PC” box, on by default. When it is on, the app keeps your sign-in on your PC, protected for your Windows user, so you aren’t asked each time and the app can open without a network connection. When it is off, the sign-in is forgotten when the app closes. The service checks every sign-in token before it accepts a request. To limit abuse, the service briefly keeps your network address in memory to count requests; it is never logged or stored.
 
 Data is kept until you delete it. Deleted data may remain in database backups for a short time. The service is hosted in Microsoft Azure in the East US region. Nothing is sold or shared with anyone except Microsoft, which hosts the service.
 
@@ -58,14 +58,14 @@ You download and update CoPilot Checklist through the Microsoft Store. Microsoft
 
 ## Sharing and selling
 
-I don’t sell or rent information about you. The only information the service holds is what you choose to share through Community, described above.
+I don’t sell or rent information about you. The only information the service holds is your sign-in account details and what you choose to share through Community, described above.
 
 ## Your choices
 
-- **Don’t sign in.** Everything except sharing and rating works without an account.
+- **Using the app needs an account.** If you don’t want one, don’t use this version of the app.
 - **Stop sharing** an aircraft at any time from the Community page. It is removed, along with its ratings. People who already downloaded it keep their copies.
 - **Delete everything.** “Delete all my community data” on the Community page removes every aircraft you shared and every rating you gave. To close the sign-in account itself, email [support@chrisgonzalez.net](mailto:support@chrisgonzalez.net?subject=CoPilot%20Checklist%20account%20deletion) and I’ll delete it within 30 days.
-- **Sign out** to remove the saved sign-in from your PC.
+- **Sign out** to remove the saved sign-in from your PC. The app asks you to sign in again before it can be used.
 - **Turn off the microphone** in Windows Settings at any time.
 - **Remove local data** by uninstalling the app and, if it remains, deleting the `CoPilot-Checklist` folder in `%LOCALAPPDATA%`.
 - **Ask me anything** about your information at [support@chrisgonzalez.net](mailto:support@chrisgonzalez.net?subject=CoPilot%20Checklist%20privacy%20request). I’ll reply within 30 days.
